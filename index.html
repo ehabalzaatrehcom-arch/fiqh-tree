@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الخطة الشجرية لتخصص الفقه وأصوله - جامعة عمان العربية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700;800;900&family=Cairo:wght@700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        :root {
+            --bg-page: #f1f5f9;
+            --panel-bg: #ffffff;
+            
+            --box-root: #e0f2fe;
+            --border-root: #0284c7;
+            --text-root: #0369a1;
+
+            --box-mandatory: #f0fdf4;
+            --border-mandatory: #86efac;
+            --text-mandatory: #166534;
+
+            --box-optional: #fefce8;
+            --border-optional: #fde047;
+            --text-optional: #854d0e;
+
+            --box-free: #f8fafc;
+            --border-free: #cbd5e1;
+            --text-free: #334155;
+
+            --done-root-bg: #0369a1;
+            --done-root-border: #075985;
+
+            --done-mand-bg: #15803d;
+            --done-mand-border: #166534;
+
+            --done-opt-bg: #b45309;
+            --done-opt-border: #92400e;
+
+            --done-free-bg: #334155;
+            --done-free-border: #1e293b;
+        }
+
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            font-family: 'Tajawal', 'Cairo', Tahoma, sans-serif !important; 
+            -webkit-print-color-adjust: exact !important; 
+            print-color-adjust: exact !important; 
+        }
+
+        body { 
+            background-color: var(--bg-page); 
+            padding: 12px; 
+            color: #0f172a; 
+            direction: rtl; 
+        }
+        
+        .toolbar {
+            max-width: 1100px;
+            margin: 0 auto 12px auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .buttons-group {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn {
+            border: none;
+            padding: 8px 18px;
+            font-size: 13.5px;
+            font-weight: 700;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+        }
+
+        .btn-download {
+            background: #0284c7;
+            color: #ffffff;
+        }
+
+        .btn-print {
+            background: #ffffff;
+            color: #1e293b;
+            border: 1px solid #cbd5e1;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            filter: brightness(0.95);
+        }
+
+        .hours-counter-badge {
+            background: #ffffff;
+            border: 2px solid #0284c7;
+            border-radius: 12px;
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 2px 8px rgba(2, 132, 199, 0.15);
+            flex-wrap: wrap;
+        }
+
+        .counter-label {
+            font-size: 13.5px;
+            font-weight: 800;
+            color: #1e293b;
+        }
+
+        .counter-number {
+            font-size: 19px;
+            font-weight: 900;
+            color: #0284c7;
+            background: #e0f2fe;
+            padding: 2px 10px;
+            border-radius: 10px;
+        }
+
+        .counter-note {
+            font-size: 12px;
+            font-weight: 700;
+            color: #0369a1;
+            background: #f0fdf4;
+            border: 1px solid #86efac;
+            padding: 3px 8px;
+            border-radius: 6px;
+        }
+
+        .wrapper { 
+            max-width: 1100px; 
+            margin: 0 auto; 
+            background: #ffffff !important; 
+            border: 1.5px solid #e2e8f0; 
+            border-radius: 14px; 
+            padding: 16px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+        }
+        
+        .header { 
+            text-align: center;
+            margin-bottom: 14px; 
+            border-bottom: 1.5px solid #f1f5f9; 
+            padding-bottom: 12px; 
+        }
+
+        .header h1 { 
+            font-size: 25px; 
+            color: #0f172a; 
+            font-weight: 900;
+            letter-spacing: -0.3px;
+        }
+
+        .header p { 
+            font-size: 14px; 
+            color: #0284c7; 
+            font-weight: 800; 
+            margin-top: 4px; 
+        }
+
+        .section { 
+            background: #f8fafc; 
+            border: 1px solid #e2e8f0; 
+            border-radius: 10px; 
+            padding: 12px; 
+            margin-bottom: 12px; 
+        }
+
+        .card { 
+            background: #f0fdfa !important; 
+            border: 1.5px solid #99f6e4 !important; 
+            border-radius: 8px; 
+            padding: 8px; 
+            box-shadow: 0 2px 5px rgba(15, 118, 110, 0.04);
+        }
+
+        .box { 
+            border-radius: 6px; 
+            padding: 6px 8px; 
+            font-size: 12px; 
+            font-weight: 700; 
+            min-height: 38px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            line-height: 1.25; 
+            gap: 6px;
+            transition: all 0.22s ease;
+            user-select: none;
+            cursor: pointer;
+        }
+
+        .box.root-course { 
+            background: var(--box-root); 
+            border: 1.8px solid var(--border-root); 
+            color: var(--text-root); 
+            font-size: 13px; 
+            font-weight: 800;
+            width: 100%;
+        }
+
+        .box.mand-course { 
+            background: var(--box-mandatory); 
+            border: 1.5px solid var(--border-mandatory); 
+            color: var(--text-mandatory); 
+        }
+
+        .box.opt-course { 
+            background: var(--box-optional); 
+            border: 1.5px dashed var(--border-optional); 
+            color: var(--text-optional); 
+        }
+
+        .box.free-course { 
+            background: var(--box-free); 
+            border: 1.2px solid var(--border-free); 
+            color: var(--text-free); 
+            font-size: 11.5px; 
+        }
+
+        .box.free-opt-course { 
+            background: var(--box-optional); 
+            border: 1.5px dashed var(--border-optional); 
+            color: var(--text-optional); 
+            font-size: 11.5px; 
+        }
+
+        .box.root-course.completed {
+            background: var(--done-root-bg) !important;
+            border-color: var(--done-root-border) !important;
+            color: #ffffff !important;
+        }
+
+        .box.mand-course.completed {
+            background: var(--done-mand-bg) !important;
+            border-color: var(--done-mand-border) !important;
+            color: #ffffff !important;
+        }
+
+        .box.opt-course.completed, .box.free-opt-course.completed {
+            background: var(--done-opt-bg) !important;
+            border-color: var(--done-opt-border) !important;
+            color: #ffffff !important;
+        }
+
+        .box.free-course.completed {
+            background: var(--done-free-bg) !important;
+            border-color: var(--done-free-border) !important;
+            color: #ffffff !important;
+        }
+
+        .check-box {
+            width: 16px;
+            height: 16px;
+            min-width: 16px;
+            border: 1.5px solid currentColor;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .box.completed .check-box {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: #ffffff;
+        }
+
+        .box.completed .check-box::after {
+            content: '✔';
+            font-size: 11px;
+            color: #ffffff;
+            font-weight: 900;
+        }
+
+        .box-title-text {
+            flex: 1;
+            text-align: center;
+        }
+
+        .info-strip-header {
+            background: #dbeafe;
+            border: 2px solid #1d4ed8;
+            border-radius: 8px;
+            padding: 8px 14px;
+            margin-bottom: 12px;
+            font-size: 13px;
+            color: #0f172a;
+            font-weight: 900;
+            text-align: center;
+            box-shadow: 0 1px 4px rgba(29, 78, 216, 0.12);
+        }
+
+        .notice-banner {
+            background: #fef08a;
+            border: 2px solid #b45309;
+            border-radius: 8px;
+            padding: 8px 14px;
+            margin-top: 12px;
+            font-size: 13px;
+            color: #451a03;
+            font-weight: 900;
+            text-align: center;
+            box-shadow: 0 1px 4px rgba(180, 83, 9, 0.12);
+        }
+
+        .svg-arrow {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 14px;
+            width: 100%;
+        }
+        .svg-arrow svg {
+            width: 10px;
+            height: 14px;
+        }
+
+        .col { display: flex; flex-direction: column; }
+
+        .three-arrows-container {
+            display: grid;
+            grid-template-columns: 2.2fr 1fr 1.6fr;
+            gap: 12px;
+            width: 100%;
+            height: 18px;
+            margin-top: 3px;
+        }
+
+        .branch-arrow-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .grid-main-fiqh { 
+            display: grid; 
+            grid-template-columns: 2.2fr 1fr 1.6fr; 
+            gap: 12px; 
+            align-items: start; 
+        }
+
+        .grid-osool-subs { display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: 6px; }
+        .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+        
+        .grid-free { 
+            display: grid; 
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 8px; 
+        }
+
+        .legend { 
+            display: flex; 
+            gap: 14px; 
+            justify-content: center; 
+            margin-top: 12px; 
+            padding-top: 10px; 
+            border-top: 1px solid #e2e8f0; 
+            font-size: 11.5px; 
+            flex-wrap: wrap;
+        }
+        .legend-item { display: flex; align-items: center; gap: 5px; color: #1e293b; font-weight: 700; }
+        .badge { width: 14px; height: 9px; border-radius: 2px; display: inline-block; }
+
+        .developer-footer {
+            margin-top: 16px;
+            padding-top: 12px;
+            border-top: 1.5px dashed #cbd5e1;
+            text-align: center;
+            font-size: 13.5px;
+            font-weight: 800;
+            color: #334155;
+            line-height: 1.6;
+        }
+        .developer-footer .name {
+            color: #0284c7;
+            font-weight: 900;
+        }
+        .developer-footer .dua {
+            color: #059669;
+            display: inline-block;
+            margin-right: 4px;
+        }
+
+        .grad-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(15, 23, 42, 0.75);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+            backdrop-filter: blur(4px);
+        }
+
+        .grad-modal-content {
+            background: #ffffff;
+            border: 3px solid #10b981;
+            border-radius: 20px;
+            max-width: 480px;
+            width: 90%;
+            padding: 30px 24px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+            animation: popIn 0.35s ease-out forwards;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.7); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .grad-icon {
+            font-size: 58px;
+            margin-bottom: 6px;
+        }
+
+        .grad-title {
+            font-size: 26px;
+            font-weight: 900;
+            color: #065f46;
+            margin-bottom: 10px;
+        }
+
+        .grad-message {
+            font-size: 16px;
+            line-height: 1.6;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 20px;
+        }
+
+        .grad-btn-close {
+            background: linear-gradient(135deg, #10b981, #0284c7);
+            color: #ffffff;
+            border: none;
+            font-size: 15px;
+            font-weight: 800;
+            padding: 10px 28px;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+            transition: all 0.2s;
+        }
+
+        .grad-btn-close:hover {
+            transform: scale(1.05);
+        }
+
+        @media screen and (max-width: 768px) {
+            body { padding: 6px; }
+            .wrapper { padding: 10px; }
+            .header h1 { font-size: 20px; }
+            .toolbar { justify-content: center; }
+            .three-arrows-container { display: none; }
+            
+            .grid-main-fiqh { grid-template-columns: 1fr; gap: 10px; }
+            .grid-osool-subs { grid-template-columns: 1fr; gap: 6px; }
+            .grid-5 { grid-template-columns: 1fr; gap: 10px; }
+            .grid-free { grid-template-columns: 1fr; gap: 6px; }
+            .box { min-height: 38px; padding: 6px 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- شريط الأدوات والعداد -->
+    <div class="toolbar">
+        <div class="hours-counter-badge">
+            <span class="counter-label">الساعات المقطوعة:</span>
+            <span class="counter-number" id="passed-hours">0</span>
+            <span class="counter-label">من أصل 102 ساعة</span>
+            <span class="counter-note">💡 الساعات المتبقية (30 ساعة) تتوزع على متطلبات الجامعة</span>
+        </div>
+        <div class="buttons-group">
+            <button class="btn btn-download" onclick="downloadImage()">📥 تحميل كصورة (PNG)</button>
+            <button class="btn btn-print" onclick="window.print()">🖨️ طباعة</button>
+        </div>
+    </div>
+
+    <div class="wrapper" id="plan-container">
+        <div class="header">
+            <h1>الخطة الشجرية لتخصص الفقه وأصوله</h1>
+            <p>جامعة عمان العربية — كلية الشريعة (132 ساعة معتمدة)</p>
+        </div>
+
+        <!-- 1. مسار الفقه العام وأصول الفقه -->
+        <div class="section">
+            <div class="box root-course" id="box-madkhal-fiqh" data-hours="3" onclick="toggleCourse('box-madkhal-fiqh', null, 'المدخل إلى الفقه الإسلامي', false)">
+                <span class="box-title-text">المدخل إلى الفقه الإسلامي</span>
+                <span class="check-box"></span>
+            </div>
+
+            <div class="three-arrows-container">
+                <div class="branch-arrow-item"><svg viewBox="0 0 10 18" width="12" height="18"><line x1="5" y1="0" x2="5" y2="12" stroke="#10b981" stroke-width="2"/><polygon points="1,10 5,18 9,10" fill="#10b981"/></svg></div>
+                <div class="branch-arrow-item"><svg viewBox="0 0 10 18" width="12" height="18"><line x1="5" y1="0" x2="5" y2="12" stroke="#10b981" stroke-width="2"/><polygon points="1,10 5,18 9,10" fill="#10b981"/></svg></div>
+                <div class="branch-arrow-item"><svg viewBox="0 0 10 18" width="12" height="18"><line x1="5" y1="0" x2="5" y2="12" stroke="#10b981" stroke-width="2"/><polygon points="1,10 5,18 9,10" fill="#10b981"/></svg></div>
+            </div>
+
+            <div class="grid-main-fiqh">
+                <div class="col card">
+                    <div class="box mand-course" id="box-osool-1" data-hours="3" onclick="toggleCourse('box-osool-1', 'box-madkhal-fiqh', 'المدخل إلى الفقه الإسلامي', false)">
+                        <span class="box-title-text">علم أصول الفقه الإسلامي (1)</span>
+                        <span class="check-box"></span>
+                    </div>
+                    <div class="grid-osool-subs" style="margin-top: 4px;">
+                        <div class="col">
+                            <div class="svg-arrow"><svg viewBox="0 0 10 14"><line x1="5" y1="0" x2="5" y2="9" stroke="#10b981" stroke-width="2"/><polygon points="1,8 5,14 9,8" fill="#10b981"/></svg></div>
+                            <div class="box mand-course" id="box-osool-3" data-hours="3" onclick="toggleCourse('box-osool-3', 'box-osool-1', 'علم أصول الفقه الإسلامي (1)', false)">
+                                <span class="box-title-text">علم أصول الفقه (3)</span>
+                                <span class="check-box"></span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="svg-arrow"><svg viewBox="0 0 10 14"><line x1="5" y1="0" x2="5" y2="9" stroke="#10b981" stroke-width="2"/><polygon points="1,8 5,14 9,8" fill="#10b981"/></svg></div>
+                            <div class="box mand-course" id="box-fiqh-muqaran" data-hours="3" onclick="toggleCourse('box-fiqh-muqaran', 'box-osool-1', 'علم أصول الفقه الإسلامي (1)', false)">
+                                <span class="box-title-text">مسائل في الفقه المقارن</span>
+                                <span class="check-box"></span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="svg-arrow"><svg viewBox="0 0 10 14"><line x1="5" y1="0" x2="5" y2="9" stroke="#f59e0b" stroke-width="2" stroke-dasharray="2,2"/><polygon points="1,8 5,14 9,8" fill="#f59e0b"/></svg></div>
+                            <div class="box opt-course is-elective" id="box-ai-fiqh" data-hours="3" onclick="toggleCourse('box-ai-fiqh', 'box-osool-1', 'علم أصول الفقه الإسلامي (1)', true)">
+                                <span class="box-title-text">قضايا فقهية معاصرة (اختياري)</span>
+                                <span class="check-box"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col card">
+                    <div class="box mand-course" id="box-muamalat-1" data-hours="3" onclick="toggleCourse('box-muamalat-1', 'box-madkhal-fiqh', 'المدخل إلى الفقه الإسلامي', false)">
+                        <span class="box-title-text">فقه المعاملات المالية (1)</span>
+                        <span class="check-box"></span>
+                    </div>
+                    <div class="svg-arrow"><svg viewBox="0 0 10 14"><line x1="5" y1="0" x2="5" y2="9" stroke="#10b981" stroke-width="2"/><polygon points="1,8 5,14 9,8" fill="#10b981"/></svg></div>
+                    <div class="box mand-course" id="box-muamalat-2" data-hours="3" onclick="toggleCourse('box-muamalat-2', 'box-muamalat-1', 'فقه المعاملات المالية (1)', false)">
+                        <span class="box-title-text">فقه المعاملات المالية (2)</span>
+                        <span class="check-box"></span>
+                    </div>
+                </div>
+
+                <div class="col card" style="gap: 5px;">
+                    <div class="box mand-course" id="box-osool-2" data-hours="3" onclick="toggleCourse('box-osool-2', 'box-madkhal-fiqh', 'المدخل إلى الفقه الإسلامي', false)">
+                        <span class="box-title-text">علم أصول الفقه الإسلامي (2)</span>
+                        <span class="check-box"></span>
+                    </div>
+                    <div class="box mand-course" id="box-uqubat" data-hours="3" onclick="toggleCourse('box-uqubat', 'box-madkhal-fiqh', 'المدخل إلى الفقه الإسلامي', false)">
+                        <span class="box-title-text">فقه العقوبات في الإسلام</span>
+                        <span class="check-box"></span>
+                    </div>
+                    <div class="box mand-course" id="box-qadaa" data-hours="3" onclick="toggleCourse('box-qadaa', 'box-madkhal-fiqh', 'المدخل إلى الفقه الإسلامي', false)">
+                        <span class="box-title-text">فقه القضاء وطرق الإثبات الشرعي</span>
+                        <span class="check-box"></span>
+                    </div>
+                    <div class="box mand-course" id="box-madani" data-hours="3" onclick="toggleCourse('box-madani', 'box-madkhal-fiqh', 'المدخل إلى الفقه الإسلامي', false)">
+                        <span class="box-title-text">فقه القانون المدني الأردني</span>
+                        <span class="check-box"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. المسارات المتسلسلة الأخرى -->
+        <div class="section">
+            <div class="grid-5">
+                <!-- فقه العبادات -->
+                <div class="card col">
+                    <div class="box root-course" id="box-tahara" data-hours="3" onclick="toggleCourse('box-tahara', null, 'فقه الطهارة', false)">
+                        <span class="box-title-text">فقه الطهارة</span>
+                        <span class="check-box"></span>
+                    </div>
+                    <div class="svg-arrow"><svg viewBox="0 0 10 14"><line x1="5" y1="0" x2="5" y2="9" stroke="#10b981" stroke-width="2"/><polygon points="1,8 5,14 9,8" fill="#10b981"/></svg></div>
+                    <div class="box mand-course" id="box-salah" data-hours="3" onclick="toggleCourse('box-salah', 'box-tahara', 'فقه الطهارة', false)">
+                        <span class="box-title-text">فقه الصلاة</span>
+                        <span class="check-box"></span>
+                    </div>
+                </div>
+
+                <!-- الأحوال الشخصية -->
+                <div class="card col">
+                    <div class="box root-course" id="box-ahwal-1" data-hours="3" onclick="toggleCourse('box-ahwal-1', null, 'فقه الأحوال الشخصية (1)', false)">
+                        <span class="box-title-text">فقه الأحوال الشخصية (1)</span>
+                        <span class="check-box"></span>
+                    </div>
+                    <div class="svg-arrow"><svg viewBox="0 0 10 14"><line x1="5" y1="0" x2="5" y2="9" stroke="#10b981" stroke-width="2"/><polygon points="1,8 5,14 9,8" fill="#10b981"/></svg></div>
+                    <div class="box mand-course" id="box-ahwal-2" data-hours="3" onclick="toggleCourse('box-ahwal-2', 'box-ahwal-1', 'فقه الأحوال الشخصية (1)', false)">
+                        <span class="box-title-text">فقه الأحوال الشخصية (2)</span>
+                        <span class="check-box"></span>
+                    </div>
+                </div>
+
+                <!-- القرآن والتلاوة -->
+                <div class="card col">
+                    <div class="box root-course" id="box-tilawa-1" data-hours="1" onclick="toggleCourse('box-tilawa-1', null, 'التلاوة والحفظ (1)', false)">
+                        <span class="box-title-text">التلاوة والحفظ (1)</span>
+                        <span class="check-box"></span>
+                    </div>
+                    <div class="svg-arrow"><svg viewBox="0 0 10 14"><line x1="5" y1="0" x2="5" y2="9" stroke="#10b981" stroke-width="2"/><polygon points="1,8 5,14 9,8" fill="#10b981"/></svg></div>
+                    <div class="box mand-course" id="box-tilawa-2" data-hours="1" onclick="toggleCourse('box-tilawa-2', 'box-tilawa-1', 'التلاوة والحفظ (1)', false)">
+                        <span class="box-title-text">التلاوة والحفظ (2)</span>
+                        <span class="check-box"></span>
+                    </div>
+                    <div class="svg-arrow"><svg viewBox="0 0 10 14"><line x1="5" y1="0" x2="5" y2="9" stroke="#10b981" stroke-width="2"/><polygon points="1,8 5,14 9,8" fill="#10b981"/></svg></div>
+                    <div class="box mand-course" id="box-tilawa-3" data-hours="1" onclick="toggleCourse('box-tilawa-3', 'box-tilawa-2', 'التلاوة والحفظ (2)', false)">
+                        <span class="box-title-text">التلاوة والحفظ (3)</span>
+                        <span class="check-box"></span>
+                    </div>
+                </div>
+
+                <!-- الحديث الشريف (المادتان متجاورتان وتتفرعان معاً من علوم الحديث) -->
+                <div class="card col">
+                    <div class="box root-course" id="box-hadith-ulum" data-hours="3" onclick="toggleCourse('box-hadith-ulum', null, 'علوم الحديث الشريف', false)">
+                        <span class="box-title-text">علوم الحديث الشريف</span>
+                        <span class="check-box"></span>
+                    </div>
+                    <div style="height: 14px; width: 100%;">
+                        <svg width="100%" height="14" viewBox="0 0 100 14" preserveAspectRatio="none">
+                            <line x1="50" y1="0" x2="50" y2="5" stroke="#10b981" stroke-width="2"/>
+                            <line x1="25" y1="5" x2="75" y2="5" stroke="#10b981" stroke-width="2"/>
+                            <line x1="25" y1="5" x2="25" y2="12" stroke="#10b981" stroke-width="2"/>
+                            <polygon points="22,10 25,14 28,10" fill="#10b981"/>
+                            <line x1="75" y1="5" x2="75" y2="12" stroke="#10b981" stroke-width="2"/>
+                            <polygon points="72,10 75,14 78,10" fill="#10b981"/>
+                        </svg>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px;">
+                        <div class="box mand-course" id="box-hadith-takhrij" data-hours="3" style="font-size: 11px; padding: 4px 2px;" onclick="toggleCourse('box-hadith-takhrij', 'box-hadith-ulum', 'علوم الحديث الشريف', false)">
+                            <span class="box-title-text">تخريج الأحاديث</span>
+                            <span class="check-box"></span>
+                        </div>
+                        <div class="box mand-course" id="box-hadith-tahlili" data-hours="3" style="font-size: 11px; padding: 4px 2px;" onclick="toggleCourse('box-hadith-tahlili', 'box-hadith-ulum', 'علوم الحديث الشريف', false)">
+                            <span class="box-title-text">الحديث التحليلي</span>
+                            <span class="check-box"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- العقيدة الإسلامية -->
+                <div class="card col">
+                    <div class="box root-course" id="box-madkhal-aqeedah" data-hours="3" onclick="toggleCourse('box-madkhal-aqeedah', null, 'المدخل إلى العقيدة الإسلامية', false)">
+                        <span class="box-title-text">المدخل إلى العقيدة الإسلامية</span>
+                        <span class="check-box"></span>
+                    </div>
+                    <div style="height: 14px; width: 100%;">
+                        <svg width="100%" height="14" viewBox="0 0 100 14" preserveAspectRatio="none">
+                            <line x1="50" y1="0" x2="50" y2="5" stroke="#10b981" stroke-width="2"/>
+                            <line x1="25" y1="5" x2="75" y2="5" stroke="#10b981" stroke-width="2"/>
+                            <line x1="25" y1="5" x2="25" y2="12" stroke="#10b981" stroke-width="2"/><polygon points="22,10 25,14 28,10" fill="#10b981"/>
+                            <line x1="75" y1="5" x2="75" y2="12" stroke="#10b981" stroke-width="2"/><polygon points="72,10 75,14 78,10" fill="#10b981"/>
+                        </svg>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px;">
+                        <div class="box mand-course" id="box-aqeedah-main" data-hours="3" style="font-size: 11px; padding: 4px 2px;" onclick="toggleCourse('box-aqeedah-main', 'box-madkhal-aqeedah', 'المدخل إلى العقيدة الإسلامية', false)">
+                            <span class="box-title-text">العقيدة الإسلامية</span>
+                            <span class="check-box"></span>
+                        </div>
+                        <div class="box mand-course" id="box-firaq" data-hours="3" style="font-size: 11px; padding: 4px 2px;" onclick="toggleCourse('box-firaq', 'box-madkhal-aqeedah', 'المدخل إلى العقيدة الإسلامية', false)">
+                            <span class="box-title-text">الفرق والأديان</span>
+                            <span class="check-box"></span>
+                        </div>
+                    </div>
+                    <div class="svg-arrow"><svg viewBox="0 0 10 14"><line x1="5" y1="0" x2="5" y2="9" stroke="#f59e0b" stroke-width="2" stroke-dasharray="2,2"/><polygon points="1,8 5,14 9,8" fill="#f59e0b"/></svg></div>
+                    <div class="box opt-course is-elective" id="box-qiraat-aqeedah" data-hours="3" onclick="toggleCourse('box-qiraat-aqeedah', 'box-madkhal-aqeedah', 'المدخل إلى العقيدة الإسلامية', true)">
+                        <span class="box-title-text">قراءات في كتب العقيدة (اختياري)</span>
+                        <span class="check-box"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. مواد التخصص بدون متطلب سابق -->
+        <div class="section" style="margin-bottom: 0;">
+            <div class="info-strip-header">
+                📌 مواد تخصص ليس لها متطلب سابق (تسجيل مباشر)
+            </div>
+
+            <div class="grid-free" id="freeCoursesGrid">
+                <div class="box free-course" id="f-1" data-order="1" data-hours="3" onclick="toggleCourse('f-1', null, '', false)"><span class="box-title-text">علوم القرآن الكريم</span><span class="check-box"></span></div>
+                <div class="box free-course" id="f-2" data-order="2" data-hours="3" onclick="toggleCourse('f-2', null, '', false)"><span class="box-title-text">قراءات في السيرة النبوية</span><span class="check-box"></span></div>
+                <div class="box free-course" id="f-3" data-order="3" data-hours="3" onclick="toggleCourse('f-3', null, '', false)"><span class="box-title-text">آيات الأحكام</span><span class="check-box"></span></div>
+                <div class="box free-course" id="f-4" data-order="4" data-hours="3" onclick="toggleCourse('f-4', null, '', false)"><span class="box-title-text">القواعد الفقهية</span><span class="check-box"></span></div>
+                
+                <div class="box free-course" id="f-5" data-order="5" data-hours="3" onclick="toggleCourse('f-5', null, '', false)"><span class="box-title-text">فقه الزكاة والصوم والحج</span><span class="check-box"></span></div>
+                <div class="box free-course" id="f-6" data-order="6" data-hours="3" onclick="toggleCourse('f-6', null, '', false)"><span class="box-title-text">فقه الأيمان والنذور</span><span class="check-box"></span></div>
+                <div class="box free-course" id="f-7" data-order="7" data-hours="3" onclick="toggleCourse('f-7', null, '', false)"><span class="box-title-text">السياسة الشرعية</span><span class="check-box"></span></div>
+                <div class="box free-course" id="f-8" data-order="8" data-hours="3" onclick="toggleCourse('f-8', null, '', false)"><span class="box-title-text">العلاقات الدولية في الإسلام</span><span class="check-box"></span></div>
+                
+                <div class="box free-course" id="f-9" data-order="9" data-hours="3" onclick="toggleCourse('f-9', null, '', false)"><span class="box-title-text">دراسات في مقاصد التشريع الإسلامي</span><span class="check-box"></span></div>
+                <div class="box free-course" id="f-10" data-order="10" data-hours="3" onclick="toggleCourse('f-10', null, '', false)"><span class="box-title-text">الذكاء الإصطناعي في البحث العلمي للعلوم الشرعية</span><span class="check-box"></span></div>
+                <div class="box free-course" id="f-11" data-order="11" data-hours="3" onclick="toggleCourse('f-11', null, '', false)"><span class="box-title-text">تطبيقات نحوية</span><span class="check-box"></span></div>
+                <div class="box free-opt-course is-elective" id="f-12" data-order="12" data-hours="3" onclick="toggleCourse('f-12', null, '', true)"><span class="box-title-text">أحاديث الأحكام (اختياري)</span><span class="check-box"></span></div>
+                
+                <div class="box free-opt-course is-elective" id="f-13" data-order="13" data-hours="3" onclick="toggleCourse('f-13', null, '', true)"><span class="box-title-text">فقه الأطعمة والأشربة والذبائح (اختياري)</span><span class="check-box"></span></div>
+                <div class="box free-opt-course is-elective" id="f-14" data-order="14" data-hours="3" onclick="toggleCourse('f-14', null, '', true)"><span class="box-title-text">موضوعات خاصة في الشريعة الإسلامية (اختياري)</span><span class="check-box"></span></div>
+                <div class="box free-opt-course is-elective" id="f-15" data-order="14" data-hours="3" onclick="toggleCourse('f-15', null, '', true)"><span class="box-title-text">فقه الدعوة والخطابة باللغة الإنجليزية (اختياري)</span><span class="check-box"></span></div>
+                <div class="box free-opt-course is-elective" id="f-16" data-order="16" data-hours="3" onclick="toggleCourse('f-16', null, '', true)"><span class="box-title-text">إعجاز القرآن الكريم (اختياري)</span><span class="check-box"></span></div>
+            </div>
+
+            <div class="notice-banner">
+                ⚠️ ملاحظة مواد التخصص الاختيارية: يُسمح باختيار مادتين فقط كحد أقصى بمقدار (6) ساعات معتمدة حسب الخطة
+            </div>
+        </div>
+
+        <!-- دليل الألوان -->
+        <div class="legend">
+            <div class="legend-item"><span class="badge" style="background:#e0f2fe; border:1px solid #0284c7;"></span> مادة أساسية (متطلب سابق)</div>
+            <div class="legend-item"><span class="badge" style="background:#f0fdf4; border:1px solid #86efac;"></span> متطلب إجباري تخصص</div>
+            <div class="legend-item"><span class="badge" style="background:#fefce8; border:1px dashed #fde047;"></span> اختياري تخصص (مادتان فقط)</div>
+            <div class="legend-item"><span class="badge" style="background:#f8fafc; border:1px solid #cbd5e1;"></span> بدون متطلب سابق</div>
+            <div class="legend-item"><span class="badge" style="background:#0369a1; border:1px solid #075985;"></span> مادة منجزة (تصبح أغمق)</div>
+        </div>
+
+        <!-- التذييل -->
+        <div class="developer-footer">
+            تم تطوير هذه الخطة بواسطة الطالب <span class="name">إيهاب الزعاترة</span>، <span class="dua">ولا تنسوني ووالدَيَّ من صالح دعائكم 🤲</span>
+        </div>
+    </div>
+
+    <!-- نافذة تهنئة التخرج -->
+    <div class="grad-modal-overlay" id="gradModal">
+        <div class="grad-modal-content">
+            <div class="grad-icon">🎓</div>
+            <div class="grad-title">مبارك التخرج!</div>
+            <div class="grad-message">
+                نفع الله بك وبارك الله فيك، ووفقك لخدمة دينه وأمته.<br>
+                أتممت بحمد الله جميع ساعات تخصص الفقه وأصوله (132 ساعة معتمدة) بنجاح.
+            </div>
+            <button class="grad-btn-close" onclick="closeGradModal()">تقبّل الله ونفع بكم 🌿</button>
+        </div>
+    </div>
+
+    <script>
+        let totalHours = 0;
+        let graduationCelebrated = false;
+
+        function updateHours() {
+            totalHours = 0;
+            const completedBoxes = document.querySelectorAll('.box.completed');
+            completedBoxes.forEach(b => {
+                const hours = parseInt(b.getAttribute('data-hours') || '3');
+                totalHours += hours;
+            });
+            document.getElementById('passed-hours').textContent = totalHours;
+
+            if (totalHours >= 102 && !graduationCelebrated) {
+                graduationCelebrated = true;
+                triggerGraduation();
+            } else if (totalHours < 102) {
+                graduationCelebrated = false;
+            }
+        }
+
+        function triggerGraduation() {
+            document.getElementById('gradModal').style.display = 'flex';
+
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 120,
+                    spread: 80,
+                    origin: { y: 0.6 }
+                });
+                setTimeout(() => {
+                    confetti({
+                        particleCount: 150,
+                        angle: 60,
+                        spread: 60,
+                        origin: { x: 0 }
+                    });
+                    confetti({
+                        particleCount: 150,
+                        angle: 120,
+                        spread: 60,
+                        origin: { x: 1 }
+                    });
+                }, 300);
+            }
+        }
+
+        function closeGradModal() {
+            document.getElementById('gradModal').style.display = 'none';
+        }
+
+        function reorderFreeCourses() {
+            const grid = document.getElementById('freeCoursesGrid');
+            if (!grid) return;
+            const items = Array.from(grid.children);
+
+            items.sort((a, b) => {
+                const aDone = a.classList.contains('completed') ? 1 : 0;
+                const bDone = b.classList.contains('completed') ? 1 : 0;
+
+                if (aDone !== bDone) {
+                    return bDone - aDone;
+                }
+                const aOrder = parseInt(a.getAttribute('data-order') || '0');
+                const bOrder = parseInt(b.getAttribute('data-order') || '0');
+                return aOrder - bOrder;
+            });
+
+            items.forEach(item => grid.appendChild(item));
+        }
+
+        function toggleCourse(courseId, prereqId, prereqName, isElective) {
+            const courseEl = document.getElementById(courseId);
+            
+            if (courseEl.classList.contains('completed')) {
+                courseEl.classList.remove('completed');
+                uncheckDependents(courseId);
+                updateHours();
+                reorderFreeCourses();
+                return;
+            }
+
+            if (isElective) {
+                const completedElectives = document.querySelectorAll('.box.is-elective.completed');
+                if (completedElectives.length >= 2) {
+                    alert('⚠️ عذراً، لا يمكنك اختيار أكثر من مادتين اختياريتين (6 ساعات كحد أقصى حسب الخطة الدراسية).');
+                    return;
+                }
+            }
+
+            if (prereqId) {
+                const prereqEl = document.getElementById(prereqId);
+                if (!prereqEl.classList.contains('completed')) {
+                    alert(`⚠️ عذراً، لا يمكنك إنجاز هذه المادة قبل اجتياز المتطلب السابق لها أولاً:\n[ ${prereqName} ]`);
+                    return;
+                }
+            }
+
+            courseEl.classList.add('completed');
+            updateHours();
+            reorderFreeCourses();
+        }
+
+        function uncheckDependents(prereqId) {
+            const allCourses = document.querySelectorAll('.box');
+            allCourses.forEach(box => {
+                const clickAttr = box.getAttribute('onclick');
+                if (clickAttr && clickAttr.includes(`'${prereqId}'`)) {
+                    if (box.classList.contains('completed')) {
+                        box.classList.remove('completed');
+                        uncheckDependents(box.id);
+                    }
+                }
+            });
+        }
+
+        function downloadImage() {
+            const element = document.getElementById('plan-container');
+            html2canvas(element, {
+                scale: 2,
+                backgroundColor: '#ffffff',
+                useCORS: true
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = `خطة_الفقه_وأصوله_${totalHours}_ساعة.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        }
+    </script>
+
+</body>
+</html>
