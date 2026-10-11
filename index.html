@@ -129,7 +129,7 @@
             flex: 1;
         }
 
-        /* توحيد مظهر ولون جميع الأزرار */
+        /* توحيد مظهر ولون الأزرار */
         .btn {
             border: none;
             padding: 8px 15px;
@@ -152,34 +152,28 @@
             box-shadow: 0 4px 10px rgba(2, 132, 199, 0.25);
         }
 
-        /* تمييز حالة الزر النشط فقط للمتاح */
+        /* تمييز حالة الزر النشط للمتاح */
         .btn.active-filter {
             background: #0369a1 !important;
             box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.35) !important;
         }
 
-        /* إبراز زر حذف التحديد في مكان واضح */
+        /* زر حذف التحديد باللون الأحمر الصريح والبارز */
         .reset-btn-wrapper {
             margin-right: auto;
         }
 
-        .btn-reset-prominent {
-            background: #ffffff !important;
-            color: #dc2626 !important;
-            border: 2px solid #ef4444 !important;
-            font-weight: 800 !important;
-            box-shadow: 0 2px 6px rgba(239, 68, 68, 0.15) !important;
-        }
-
-        body.dark-mode .btn-reset-prominent {
-            background: #1e293b !important;
-            color: #f87171 !important;
-            border-color: #f87171 !important;
-        }
-
-        .btn-reset-prominent:hover {
+        .btn-reset-red {
             background: #ef4444 !important;
             color: #ffffff !important;
+            border: 1.5px solid #dc2626 !important;
+            font-weight: 800 !important;
+            box-shadow: 0 3px 8px rgba(239, 68, 68, 0.3) !important;
+        }
+
+        .btn-reset-red:hover {
+            background: #dc2626 !important;
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.45) !important;
         }
 
         /* شريط الإحصائيات الرئيسي */
@@ -240,7 +234,7 @@
             color: #fca5a5;
         }
 
-        /* كرت متطلبات الجامعة البارز والواضح جداً */
+        /* كرت متطلبات الجامعة */
         .uni-hours-prominent-card {
             max-width: 1100px;
             margin: 0 auto 12px auto;
@@ -589,7 +583,7 @@
             .toolbar-top-row { justify-content: center; }
             .buttons-group { justify-content: center; }
             .reset-btn-wrapper { margin-right: 0; width: 100%; text-align: center; }
-            .btn-reset-prominent { width: 100%; justify-content: center; }
+            .btn-reset-red { width: 100%; justify-content: center; }
             .controls-sub-row { flex-direction: column; align-items: stretch; }
             .search-box-wrap { max-width: 100%; }
             .three-arrows-container { display: none; }
@@ -661,21 +655,21 @@
             </div>
         </div>
 
-        <!-- أزرار الإجراءات بلون موحد وزر مسح التحديد في مكان واضح وبارز -->
+        <!-- أزرار الإجراءات بعد تبديل المشاركة والمتاح مع زر المسح الأحمر البارز -->
         <div class="toolbar-top-row" style="margin-top: 4px;">
             <div class="buttons-group">
                 <button class="btn" onclick="installAppDirectly()">📲 تثبيت كتطبيق</button>
+                <button class="btn" onclick="openShareModal()">📲 مشاركة</button>
                 <button class="btn" id="btn-toggle-available" onclick="toggleAvailableCourses()">🔓 المتاح للتسجيل</button>
                 <button class="btn" onclick="printPassedCoursesReport()">📄 تقرير بالمواد المجتازة</button>
                 <button class="btn" onclick="downloadImage()">📥 تحميل كصورة</button>
                 <button class="btn" onclick="window.print()">🖨️ طباعة الخطة</button>
                 <button class="btn" id="btn-dark-mode" onclick="toggleDarkMode()">🌙 النمط الليلي</button>
-                <button class="btn" onclick="openShareModal()">📲 مشاركة</button>
             </div>
             
-            <!-- زر مسح التحديد في مكان بارز ومستقل -->
+            <!-- زر مسح التحديد باللون الأحمر البارز -->
             <div class="reset-btn-wrapper">
-                <button class="btn btn-reset-prominent" onclick="resetAllCourses()">🔄 مسح كل التحديد</button>
+                <button class="btn btn-reset-red" onclick="resetAllCourses()">🔄 مسح كل التحديد</button>
             </div>
         </div>
 
