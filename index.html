@@ -70,6 +70,7 @@
         .buttons-group {
             display: flex;
             gap: 8px;
+            flex-wrap: wrap;
         }
 
         .btn {
@@ -81,6 +82,9 @@
             cursor: pointer;
             transition: all 0.2s ease;
             box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
         }
 
         .btn-download {
@@ -92,6 +96,12 @@
             background: #ffffff;
             color: #1e293b;
             border: 1px solid #cbd5e1;
+        }
+
+        .btn-reset {
+            background: #ef4444;
+            color: #ffffff;
+            border: 1px solid #dc2626;
         }
 
         .btn:hover {
@@ -478,7 +488,7 @@
 </head>
 <body>
 
-    <!-- شريط الأدوات والعداد -->
+    <!-- شريط الأدوات والعداد مع زر إعادة التعيين -->
     <div class="toolbar">
         <div class="hours-counter-badge">
             <span class="counter-label">الساعات المقطوعة:</span>
@@ -487,6 +497,7 @@
             <span class="counter-note">💡 الساعات المتبقية (30 ساعة) تتوزع على متطلبات الجامعة</span>
         </div>
         <div class="buttons-group">
+            <button class="btn btn-reset" onclick="resetAllCourses()">🔄 مسح التحديد</button>
             <button class="btn btn-download" onclick="downloadImage()">📥 تحميل كصورة (PNG)</button>
             <button class="btn btn-print" onclick="window.print()">🖨️ طباعة</button>
         </div>
@@ -622,7 +633,7 @@
                     </div>
                 </div>
 
-                <!-- الحديث الشريف (المادتان متجاورتان وتتفرعان معاً من علوم الحديث) -->
+                <!-- الحديث الشريف -->
                 <div class="card col">
                     <div class="box root-course" id="box-hadith-ulum" data-hours="3" onclick="toggleCourse('box-hadith-ulum', null, 'علوم الحديث الشريف', false)">
                         <span class="box-title-text">علوم الحديث الشريف</span>
@@ -660,8 +671,10 @@
                         <svg width="100%" height="14" viewBox="0 0 100 14" preserveAspectRatio="none">
                             <line x1="50" y1="0" x2="50" y2="5" stroke="#10b981" stroke-width="2"/>
                             <line x1="25" y1="5" x2="75" y2="5" stroke="#10b981" stroke-width="2"/>
-                            <line x1="25" y1="5" x2="25" y2="12" stroke="#10b981" stroke-width="2"/><polygon points="22,10 25,14 28,10" fill="#10b981"/>
-                            <line x1="75" y1="5" x2="75" y2="12" stroke="#10b981" stroke-width="2"/><polygon points="72,10 75,14 78,10" fill="#10b981"/>
+                            <line x1="25" y1="5" x2="25" y2="12" stroke="#10b981" stroke-width="2"/>
+                            <polygon points="22,10 25,14 28,10" fill="#10b981"/>
+                            <line x1="75" y1="5" x2="75" y2="12" stroke="#10b981" stroke-width="2"/>
+                            <polygon points="72,10 75,14 78,10" fill="#10b981"/>
                         </svg>
                     </div>
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px;">
@@ -707,7 +720,7 @@
                 
                 <div class="box free-opt-course is-elective" id="f-13" data-order="13" data-hours="3" onclick="toggleCourse('f-13', null, '', true)"><span class="box-title-text">فقه الأطعمة والأشربة والذبائح (اختياري)</span><span class="check-box"></span></div>
                 <div class="box free-opt-course is-elective" id="f-14" data-order="14" data-hours="3" onclick="toggleCourse('f-14', null, '', true)"><span class="box-title-text">موضوعات خاصة في الشريعة الإسلامية (اختياري)</span><span class="check-box"></span></div>
-                <div class="box free-opt-course is-elective" id="f-15" data-order="14" data-hours="3" onclick="toggleCourse('f-15', null, '', true)"><span class="box-title-text">فقه الدعوة والخطابة باللغة الإنجليزية (اختياري)</span><span class="check-box"></span></div>
+                <div class="box free-opt-course is-elective" id="f-15" data-order="15" data-hours="3" onclick="toggleCourse('f-15', null, '', true)"><span class="box-title-text">فقه الدعوة والخطابة باللغة الإنجليزية (اختياري)</span><span class="check-box"></span></div>
                 <div class="box free-opt-course is-elective" id="f-16" data-order="16" data-hours="3" onclick="toggleCourse('f-16', null, '', true)"><span class="box-title-text">إعجاز القرآن الكريم (اختياري)</span><span class="check-box"></span></div>
             </div>
 
@@ -813,6 +826,25 @@
             });
 
             items.forEach(item => grid.appendChild(item));
+        }
+
+        // دالة مسح كل التحديد وإعادة تصفير الخطة
+        function resetAllCourses() {
+            const completedBoxes = document.querySelectorAll('.box.completed');
+            if (completedBoxes.length === 0) {
+                alert('الخطة غير محددة بالفعل!');
+                return;
+            }
+
+            if (confirm('هل أنت متأكد من رغبتك في إلغاء تحديد جميع المواد وإعادة ضبط الخطة؟')) {
+                completedBoxes.forEach(box => {
+                    box.classList.remove('completed');
+                });
+                graduationCelebrated = false;
+                closeGradModal();
+                updateHours();
+                reorderFreeCourses();
+            }
         }
 
         function toggleCourse(courseId, prereqId, prereqName, isElective) {
