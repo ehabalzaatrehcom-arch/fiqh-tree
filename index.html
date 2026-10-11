@@ -133,7 +133,7 @@
         }
 
         .btn-available {
-            background: #0284c7;
+            background: #f59e0b;
             color: #ffffff;
         }
 
@@ -158,7 +158,7 @@
         }
 
         .btn-download {
-            background: #059669;
+            background: #0284c7;
             color: #ffffff;
         }
 
@@ -204,6 +204,15 @@
 
         .search-input:focus {
             border-color: #0284c7;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 14px;
+            opacity: 0.6;
         }
 
         .progress-card {
@@ -419,16 +428,24 @@
             color: #ffffff !important;
         }
 
-        /* حالة التعتيم عند البحث أو عند تفعيل وضع "المتاح للتسجيل" */
-        .box.dimmed-disabled {
-            opacity: 0.18 !important;
-            filter: grayscale(85%) !important;
-            pointer-events: none !important;
-            cursor: not-allowed !important;
+        @keyframes pulseAvailable {
+            0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7); }
+            70% { box-shadow: 0 0 0 8px rgba(245, 158, 11, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
         }
 
-        .box.highlighted-active {
-            outline: 2.5px solid #0284c7 !important;
+        .box.is-available-highlight {
+            border: 2px solid #f59e0b !important;
+            animation: pulseAvailable 1.8s infinite;
+        }
+
+        .box.search-dimmed {
+            opacity: 0.18;
+            filter: grayscale(80%);
+        }
+
+        .box.search-matched {
+            outline: 2.5px solid #0284c7;
             transform: scale(1.02);
             z-index: 10;
         }
@@ -680,6 +697,13 @@
 </head>
 <body>
 
+    <!-- فحص الوضع الليلي مباشرة قبل تحميل العناصر لتجنب أي وميض -->
+    <script>
+        if (localStorage.getItem('fiqhPlanDarkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+        }
+    </script>
+
     <!-- شريط الأدوات والتحكم الشامل -->
     <div class="toolbar">
         <div class="toolbar-top-row">
@@ -887,4 +911,358 @@
                             <line x1="50" y1="0" x2="50" y2="5" stroke="var(--arrow-stroke)" stroke-width="2"/>
                             <line x1="25" y1="5" x2="75" y2="5" stroke="var(--arrow-stroke)" stroke-width="2"/>
                             <line x1="25" y1="5" x2="25" y2="12" stroke="var(--arrow-stroke)" stroke-width="2"/><polygon points="22,10 25,14 28,10" fill="var(--arrow-stroke)"/>
-                            <line x1="75" y1="5" x2
+                            <line x1="75" y1="5" x2="75" y2="12" stroke="var(--arrow-stroke)" stroke-width="2"/><polygon points="72,10 75,14 78,10" fill="var(--arrow-stroke)"/>
+                        </svg>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px;">
+                        <div class="box mand-course" id="box-aqeedah-main" data-hours="3" style="font-size: 11px; padding: 4px 2px;" onclick="toggleCourse('box-aqeedah-main', 'box-madkhal-aqeedah', 'المدخل إلى العقيدة الإسلامية', false)">
+                            <span class="box-title-text">العقيدة الإسلامية</span>
+                            <span class="check-box"></span>
+                        </div>
+                        <div class="box mand-course" id="box-firaq" data-hours="3" style="font-size: 11px; padding: 4px 2px;" onclick="toggleCourse('box-firaq', 'box-madkhal-aqeedah', 'المدخل إلى العقيدة الإسلامية', false)">
+                            <span class="box-title-text">الفرق والأديان</span>
+                            <span class="check-box"></span>
+                        </div>
+                    </div>
+                    <div class="svg-arrow"><svg viewBox="0 0 10 14"><line x1="5" y1="0" x2="5" y2="9" stroke="#f59e0b" stroke-width="2" stroke-dasharray="2,2"/><polygon points="1,8 5,14 9,8" fill="#f59e0b"/></svg></div>
+                    <div class="box opt-course is-elective" id="box-qiraat-aqeedah" data-hours="3" onclick="toggleCourse('box-qiraat-aqeedah', 'box-madkhal-aqeedah', 'المدخل إلى العقيدة الإسلامية', true)">
+                        <span class="box-title-text">قراءات في كتب العقيدة (اختياري)</span>
+                        <span class="check-box"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. مواد التخصص بدون متطلب سابق -->
+        <div class="section" style="margin-bottom: 0;">
+            <div class="info-strip-header">
+                📌 مواد تخصص ليس لها متطلب سابق (تسجيل مباشر)
+            </div>
+
+            <div class="grid-free" id="freeCoursesGrid">
+                <div class="box free-course" id="f-1" data-order="1" data-hours="3" onclick="toggleCourse('f-1', null, '', false)"><span class="box-title-text">علوم القرآن الكريم</span><span class="check-box"></span></div>
+                <div class="box free-course" id="f-2" data-order="2" data-hours="3" onclick="toggleCourse('f-2', null, '', false)"><span class="box-title-text">قراءات في السيرة النبوية</span><span class="check-box"></span></div>
+                <div class="box free-course" id="f-3" data-order="3" data-hours="3" onclick="toggleCourse('f-3', null, '', false)"><span class="box-title-text">آيات الأحكام</span><span class="check-box"></span></div>
+                <div class="box free-course" id="f-4" data-order="4" data-hours="3" onclick="toggleCourse('f-4', null, '', false)"><span class="box-title-text">القواعد الفقهية</span><span class="check-box"></span></div>
+                
+                <div class="box free-course" id="f-5" data-order="5" data-hours="3" onclick="toggleCourse('f-5', null, '', false)"><span class="box-title-text">فقه الزكاة والصوم والحج</span><span class="check-box"></span></div>
+                <div class="box free-course" id="f-6" data-order="6" data-hours="3" onclick="toggleCourse('f-6', null, '', false)"><span class="box-title-text">فقه الأيمان والنذور</span><span class="check-box"></span></div>
+                <div class="box free-course" id="f-7" data-order="7" data-hours="3" onclick="toggleCourse('f-7', null, '', false)"><span class="box-title-text">السياسة الشرعية</span><span class="check-box"></span></div>
+                <div class="box free-course" id="f-8" data-order="8" data-hours="3" onclick="toggleCourse('f-8', null, '', false)"><span class="box-title-text">العلاقات الدولية في الإسلام</span><span class="check-box"></span></div>
+                
+                <div class="box free-course" id="f-9" data-order="9" data-hours="3" onclick="toggleCourse('f-9', null, '', false)"><span class="box-title-text">دراسات في مقاصد التشريع الإسلامي</span><span class="check-box"></span></div>
+                <div class="box free-course" id="f-10" data-order="10" data-hours="3" onclick="toggleCourse('f-10', null, '', false)"><span class="box-title-text">الذكاء الإصطناعي في البحث العلمي للعلوم الشرعية</span><span class="check-box"></span></div>
+                <div class="box free-course" id="f-11" data-order="11" data-hours="3" onclick="toggleCourse('f-11', null, '', false)"><span class="box-title-text">تطبيقات نحوية</span><span class="check-box"></span></div>
+                <div class="box free-opt-course is-elective" id="f-12" data-order="12" data-hours="3" onclick="toggleCourse('f-12', null, '', true)"><span class="box-title-text">أحاديث الأحكام (اختياري)</span><span class="check-box"></span></div>
+                
+                <div class="box free-opt-course is-elective" id="f-13" data-order="13" data-hours="3" onclick="toggleCourse('f-13', null, '', true)"><span class="box-title-text">فقه الأطعمة والأشربة والذبائح (اختياري)</span><span class="check-box"></span></div>
+                <div class="box free-opt-course is-elective" id="f-14" data-order="14" data-hours="3" onclick="toggleCourse('f-14', null, '', true)"><span class="box-title-text">موضوعات خاصة في الشريعة الإسلامية (اختياري)</span><span class="check-box"></span></div>
+                <div class="box free-opt-course is-elective" id="f-15" data-order="15" data-hours="3" onclick="toggleCourse('f-15', null, '', true)"><span class="box-title-text">فقه الدعوة والخطابة باللغة الإنجليزية (اختياري)</span><span class="check-box"></span></div>
+                <div class="box free-opt-course is-elective" id="f-16" data-order="16" data-hours="3" onclick="toggleCourse('f-16', null, '', true)"><span class="box-title-text">إعجاز القرآن الكريم (اختياري)</span><span class="check-box"></span></div>
+            </div>
+
+            <div class="notice-banner">
+                ⚠️ ملاحظة مواد التخصص الاختيارية: يُسمح باختيار مادتين فقط كحد أقصى بمقدار (6) ساعات معتمدة حسب الخطة
+            </div>
+        </div>
+
+        <!-- دليل الألوان -->
+        <div class="legend">
+            <div class="legend-item"><span class="badge" style="background:#e0f2fe; border:1px solid #0284c7;"></span> مادة أساسية (متطلب سابق)</div>
+            <div class="legend-item"><span class="badge" style="background:#f0fdf4; border:1px solid #86efac;"></span> متطلب إجباري تخصص</div>
+            <div class="legend-item"><span class="badge" style="background:#fefce8; border:1px dashed #fde047;"></span> اختياري تخصص (مادتان فقط)</div>
+            <div class="legend-item"><span class="badge" style="background:#f8fafc; border:1px solid #cbd5e1;"></span> بدون متطلب سابق</div>
+            <div class="legend-item"><span class="badge" style="background:#0369a1; border:1px solid #075985;"></span> مادة منجزة (تصبح أغمق)</div>
+            <div class="legend-item"><span class="badge" style="background:transparent; border:2px solid #f59e0b;"></span> مادة مفتوحة ومؤهل لتسجيلها</div>
+        </div>
+
+        <!-- التذييل -->
+        <div class="developer-footer">
+            تم تطوير هذه الخطة بواسطة الطالب <span class="name">إيهاب الزعاترة</span>، <span class="dua">ولا تنسوني ووالدَيَّ من صالح دعائكم 🤲</span>
+        </div>
+    </div>
+
+    <!-- نافذة تهنئة التخرج -->
+    <div class="grad-modal-overlay" id="gradModal">
+        <div class="grad-modal-content">
+            <div class="grad-icon">🎓</div>
+            <div class="grad-title">مبارك التخرج!</div>
+            <div class="grad-message">
+                نفع الله بك وبارك الله فيك، ووفقك لخدمة دينه وأمته.<br>
+                أتممت بحمد الله جميع ساعات تخصص الفقه وأصوله (102 ساعة تخصص) بنجاح.
+            </div>
+            <button class="grad-btn-close" onclick="closeGradModal()">تقبّل الله ونفع بكم 🌿</button>
+        </div>
+    </div>
+
+    <script>
+        let totalHours = 0;
+        let graduationCelebrated = false;
+        let showAvailableState = false;
+
+        const prerequisitesMap = {
+            'box-osool-1': 'box-madkhal-fiqh',
+            'box-osool-2': 'box-madkhal-fiqh',
+            'box-osool-3': 'box-osool-1',
+            'box-fiqh-muqaran': 'box-osool-1',
+            'box-ai-fiqh': 'box-osool-1',
+            'box-muamalat-1': 'box-madkhal-fiqh',
+            'box-muamalat-2': 'box-muamalat-1',
+            'box-uqubat': 'box-madkhal-fiqh',
+            'box-qadaa': 'box-madkhal-fiqh',
+            'box-madani': 'box-madkhal-fiqh',
+            'box-salah': 'box-tahara',
+            'box-ahwal-2': 'box-ahwal-1',
+            'box-tilawa-2': 'box-tilawa-1',
+            'box-tilawa-3': 'box-tilawa-2',
+            'box-hadith-takhrij': 'box-hadith-ulum',
+            'box-hadith-tahlili': 'box-hadith-ulum',
+            'box-aqeedah-main': 'box-madkhal-aqeedah',
+            'box-firaq': 'box-madkhal-aqeedah',
+            'box-qiraat-aqeedah': 'box-madkhal-aqeedah'
+        };
+
+        function saveProgress() {
+            const completedIds = [];
+            document.querySelectorAll('.box.completed').forEach(box => {
+                completedIds.push(box.id);
+            });
+            localStorage.setItem('fiqhPlanCompletedCourses', JSON.stringify(completedIds));
+        }
+
+        function loadProgress() {
+            const saved = localStorage.getItem('fiqhPlanCompletedCourses');
+            if (saved) {
+                try {
+                    const completedIds = JSON.parse(saved);
+                    completedIds.forEach(id => {
+                        const el = document.getElementById(id);
+                        if (el) el.classList.add('completed');
+                    });
+                } catch(e) {
+                    console.error(e);
+                }
+            }
+            updateHours();
+            reorderFreeCourses();
+        }
+
+        function updateHours() {
+            totalHours = 0;
+            const completedBoxes = document.querySelectorAll('.box.completed');
+            completedBoxes.forEach(b => {
+                const hours = parseInt(b.getAttribute('data-hours') || '3');
+                totalHours += hours;
+            });
+
+            document.getElementById('passed-hours').textContent = totalHours;
+
+            const percentage = Math.min(100, Math.round((totalHours / 102) * 100));
+            document.getElementById('progress-percentage-text').textContent = percentage + '%';
+            document.getElementById('progress-bar').style.width = percentage + '%';
+
+            if (totalHours >= 102 && !graduationCelebrated) {
+                graduationCelebrated = true;
+                triggerGraduation();
+            } else if (totalHours < 102) {
+                graduationCelebrated = false;
+            }
+
+            if (showAvailableState) {
+                applyAvailableHighlight();
+            }
+        }
+
+        function triggerGraduation() {
+            document.getElementById('gradModal').style.display = 'flex';
+            if (typeof confetti === 'function') {
+                confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
+                setTimeout(() => {
+                    confetti({ particleCount: 150, angle: 60, spread: 60, origin: { x: 0 } });
+                    confetti({ particleCount: 150, angle: 120, spread: 60, origin: { x: 1 } });
+                }, 300);
+            }
+        }
+
+        function closeGradModal() {
+            document.getElementById('gradModal').style.display = 'none';
+        }
+
+        function reorderFreeCourses() {
+            const grid = document.getElementById('freeCoursesGrid');
+            if (!grid) return;
+            const items = Array.from(grid.children);
+
+            items.sort((a, b) => {
+                const aDone = a.classList.contains('completed') ? 1 : 0;
+                const bDone = b.classList.contains('completed') ? 1 : 0;
+                if (aDone !== bDone) return bDone - aDone;
+                const aOrder = parseInt(a.getAttribute('data-order') || '0');
+                const bOrder = parseInt(b.getAttribute('data-order') || '0');
+                return aOrder - bOrder;
+            });
+
+            items.forEach(item => grid.appendChild(item));
+        }
+
+        function toggleCourse(courseId, prereqId, prereqName, isElective) {
+            const courseEl = document.getElementById(courseId);
+            
+            if (courseEl.classList.contains('completed')) {
+                courseEl.classList.remove('completed');
+                uncheckDependents(courseId);
+                saveProgress();
+                updateHours();
+                reorderFreeCourses();
+                return;
+            }
+
+            if (isElective) {
+                const completedElectives = document.querySelectorAll('.box.is-elective.completed');
+                if (completedElectives.length >= 2) {
+                    alert('⚠️ عذراً، لا يمكنك اختيار أكثر من مادتين اختياريتين (6 ساعات كحد أقصى حسب الخطة الدراسية).');
+                    return;
+                }
+            }
+
+            if (prereqId) {
+                const prereqEl = document.getElementById(prereqId);
+                if (!prereqEl.classList.contains('completed')) {
+                    alert(`⚠️ عذراً، لا يمكنك إنجاز هذه المادة قبل اجتياز المتطلب السابق لها أولاً:\n[ ${prereqName} ]`);
+                    return;
+                }
+            }
+
+            courseEl.classList.add('completed');
+            saveProgress();
+            updateHours();
+            reorderFreeCourses();
+        }
+
+        function uncheckDependents(prereqId) {
+            const allCourses = document.querySelectorAll('.box');
+            allCourses.forEach(box => {
+                const clickAttr = box.getAttribute('onclick');
+                if (clickAttr && clickAttr.includes(`'${prereqId}'`)) {
+                    if (box.classList.contains('completed')) {
+                        box.classList.remove('completed');
+                        uncheckDependents(box.id);
+                    }
+                }
+            });
+        }
+
+        function resetAllCourses() {
+            const completedBoxes = document.querySelectorAll('.box.completed');
+            if (completedBoxes.length === 0) {
+                alert('الخطة غير محددة بالفعل!');
+                return;
+            }
+
+            if (confirm('هل أنت متأكد من رغبتك في إلغاء تحديد جميع المواد وإعادة ضبط الخطة؟')) {
+                completedBoxes.forEach(box => box.classList.remove('completed'));
+                localStorage.removeItem('fiqhPlanCompletedCourses');
+                graduationCelebrated = false;
+                closeGradModal();
+                updateHours();
+                reorderFreeCourses();
+            }
+        }
+
+        function toggleAvailableCourses() {
+            showAvailableState = !showAvailableState;
+            const btn = document.getElementById('btn-toggle-available');
+            
+            if (showAvailableState) {
+                btn.classList.add('active');
+                btn.textContent = '🔒 إخفاء المتاح';
+                applyAvailableHighlight();
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '🔓 المتاح للتسجيل';
+                document.querySelectorAll('.box').forEach(b => b.classList.remove('is-available-highlight'));
+            }
+        }
+
+        function applyAvailableHighlight() {
+            document.querySelectorAll('.box').forEach(box => {
+                box.classList.remove('is-available-highlight');
+                if (box.classList.contains('completed')) return;
+
+                const prereqId = prerequisitesMap[box.id];
+                if (!prereqId) {
+                    box.classList.add('is-available-highlight');
+                } else {
+                    const prereqEl = document.getElementById(prereqId);
+                    if (prereqEl && prereqEl.classList.contains('completed')) {
+                        box.classList.add('is-available-highlight');
+                    }
+                }
+            });
+        }
+
+        function searchCourses() {
+            const query = document.getElementById('courseSearchInput').value.trim();
+            const boxes = document.querySelectorAll('.box');
+
+            if (!query) {
+                boxes.forEach(b => b.classList.remove('search-dimmed', 'search-matched'));
+                return;
+            }
+
+            boxes.forEach(b => {
+                const text = b.textContent.replace('✔', '').trim();
+                if (text.includes(query)) {
+                    b.classList.add('search-matched');
+                    b.classList.remove('search-dimmed');
+                } else {
+                    b.classList.remove('search-matched');
+                    b.classList.add('search-dimmed');
+                }
+            });
+        }
+
+        // معالجة وحفظ الوضع الليلي الدائم
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('fiqhPlanDarkMode', isDark ? 'true' : 'false');
+            updateDarkModeBtnText(isDark);
+        }
+
+        function updateDarkModeBtnText(isDark) {
+            const btn = document.getElementById('btn-dark-mode');
+            if (btn) {
+                btn.textContent = isDark ? '☀️ النمط النهاري' : '🌙 النمط الليلي';
+            }
+        }
+
+        function shareOnWhatsApp() {
+            const currentUrl = window.location.href;
+            const text = `🌿 خطتي الشجرية التفاعلية لتخصص الفقه وأصوله (جامعة عمان العربية):\nأنجزت حتى الآن (${totalHours}) ساعة من أصل 102 ساعة معتمدة.\nتفضل بتجربة الخطة عبر الرابط:\n${currentUrl}`;
+            const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        function downloadImage() {
+            const element = document.getElementById('plan-container');
+            html2canvas(element, {
+                scale: 2,
+                backgroundColor: document.body.classList.contains('dark-mode') ? '#1e293b' : '#ffffff',
+                useCORS: true
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = `خطة_الفقه_وأصوله_${totalHours}_ساعة.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            updateDarkModeBtnText(document.body.classList.contains('dark-mode'));
+            loadProgress();
+        });
+    </script>
+
+</body>
+</html>
