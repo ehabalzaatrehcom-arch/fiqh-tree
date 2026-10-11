@@ -428,20 +428,13 @@
             color: #ffffff !important;
         }
 
-        @keyframes pulseAvailable {
-            0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7); }
-            70% { box-shadow: 0 0 0 8px rgba(245, 158, 11, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
-        }
-
-        .box.is-available-highlight {
-            border: 2px solid #f59e0b !important;
-            animation: pulseAvailable 1.8s infinite;
-        }
-
+        /* المواد الخافتة وغير القابلة للضغط (عند البحث أو فلترة المتاح) */
+        .box.dimmed-unavailable,
         .box.search-dimmed {
-            opacity: 0.18;
-            filter: grayscale(80%);
+            opacity: 0.18 !important;
+            filter: grayscale(85%) !important;
+            pointer-events: none !important;
+            cursor: not-allowed !important;
         }
 
         .box.search-matched {
@@ -697,7 +690,7 @@
 </head>
 <body>
 
-    <!-- فحص الوضع الليلي مباشرة قبل تحميل العناصر لتجنب أي وميض -->
+    <!-- تطبيق الوضع الليلي مباشرة عند فتح الصفحة -->
     <script>
         if (localStorage.getItem('fiqhPlanDarkMode') === 'true') {
             document.body.classList.add('dark-mode');
@@ -973,7 +966,6 @@
             <div class="legend-item"><span class="badge" style="background:#fefce8; border:1px dashed #fde047;"></span> اختياري تخصص (مادتان فقط)</div>
             <div class="legend-item"><span class="badge" style="background:#f8fafc; border:1px solid #cbd5e1;"></span> بدون متطلب سابق</div>
             <div class="legend-item"><span class="badge" style="background:#0369a1; border:1px solid #075985;"></span> مادة منجزة (تصبح أغمق)</div>
-            <div class="legend-item"><span class="badge" style="background:transparent; border:2px solid #f59e0b;"></span> مادة مفتوحة ومؤهل لتسجيلها</div>
         </div>
 
         <!-- التذييل -->
@@ -1169,6 +1161,7 @@
             }
         }
 
+        // إظهار المتاح للتسجيل وخفت وإلغاء تفعيل باقي المواد
         function toggleAvailableCourses() {
             showAvailableState = !showAvailableState;
             const btn = document.getElementById('btn-toggle-available');
@@ -1180,23 +1173,36 @@
             } else {
                 btn.classList.remove('active');
                 btn.textContent = '🔓 المتاح للتسجيل';
-                document.querySelectorAll('.box').forEach(b => b.classList.remove('is-available-highlight'));
+                document.querySelectorAll('.box').forEach(b => b.classList.remove('dimmed-unavailable'));
             }
         }
 
         function applyAvailableHighlight() {
             document.querySelectorAll('.box').forEach(box => {
-                box.classList.remove('is-available-highlight');
-                if (box.classList.contains('completed')) return;
+                box.classList.remove('dimmed-unavailable');
 
+                // المادة المنجزة بالفعل تُخفّت ولا يمكن الضغط عليها أثناء عرض المتاح
+                if (box.classList.contains('completed')) {
+                    box.classList.add('dimmed-unavailable');
+                    return;
+                }
+
+                // فحص إذا كانت مؤهلة للتسجيل (مفتوحة)
                 const prereqId = prerequisitesMap[box.id];
+                let isAvailable = false;
+
                 if (!prereqId) {
-                    box.classList.add('is-available-highlight');
+                    isAvailable = true; // مادة بدون متطلب سابق أو مادة بداية
                 } else {
                     const prereqEl = document.getElementById(prereqId);
                     if (prereqEl && prereqEl.classList.contains('completed')) {
-                        box.classList.add('is-available-highlight');
+                        isAvailable = true; // اجتاز متطلبها السابق
                     }
+                }
+
+                if (!isAvailable) {
+                    // المادة مغلقة لعدم اجتياز متطلبها -> تخفيت وقفل النقر
+                    box.classList.add('dimmed-unavailable');
                 }
             });
         }
@@ -1207,6 +1213,7 @@
 
             if (!query) {
                 boxes.forEach(b => b.classList.remove('search-dimmed', 'search-matched'));
+                if (showAvailableState) applyAvailableHighlight();
                 return;
             }
 
@@ -1222,7 +1229,6 @@
             });
         }
 
-        // معالجة وحفظ الوضع الليلي الدائم
         function toggleDarkMode() {
             document.body.classList.toggle('dark-mode');
             const isDark = document.body.classList.contains('dark-mode');
