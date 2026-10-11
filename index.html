@@ -26,6 +26,9 @@
             --card-bg: #f0fdfa;
             --card-border: #99f6e4;
             
+            --btn-unified-bg: #0284c7;
+            --btn-unified-hover: #0369a1;
+
             --box-root: #e0f2fe;
             --border-root: #0284c7;
             --text-root: #0369a1;
@@ -62,6 +65,9 @@
             --border-color: #334155;
             --card-bg: #132e35;
             --card-border: #115e59;
+
+            --btn-unified-bg: #0284c7;
+            --btn-unified-hover: #38bdf8;
 
             --box-root: #0c4a6e;
             --border-root: #38bdf8;
@@ -117,41 +123,64 @@
 
         .buttons-group {
             display: flex;
-            gap: 7px;
+            gap: 8px;
             flex-wrap: wrap;
             align-items: center;
+            flex: 1;
         }
 
+        /* توحيد مظهر ولون جميع الأزرار */
         .btn {
             border: none;
-            padding: 7px 14px;
+            padding: 8px 15px;
             font-size: 13px;
             font-weight: 700;
             border-radius: 20px;
             cursor: pointer;
             transition: all 0.2s ease;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+            box-shadow: 0 2px 5px rgba(2, 132, 199, 0.15);
             display: inline-flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
+            background: var(--btn-unified-bg);
+            color: #ffffff;
         }
 
         .btn:hover {
             transform: translateY(-1px);
-            filter: brightness(0.95);
+            background: var(--btn-unified-hover);
+            box-shadow: 0 4px 10px rgba(2, 132, 199, 0.25);
         }
 
-        .btn-install { background: #059669; color: #ffffff; }
-        .btn-available { background: #f59e0b; color: #ffffff; }
-        .btn-available.active { background: #b45309; }
-        .btn-dark { background: #334155; color: #ffffff; }
-        .btn-share { background: #25d366; color: #ffffff; }
-        .btn-reset { background: #ef4444; color: #ffffff; }
-        .btn-download { background: #0284c7; color: #ffffff; }
-        .btn-report { background: #6366f1; color: #ffffff; }
-        .btn-story { background: linear-gradient(135deg, #ec4899, #8b5cf6); color: #ffffff; }
-        .btn-print { background: #ffffff; color: #1e293b; border: 1px solid #cbd5e1; }
-        body.dark-mode .btn-print { background: #1e293b; color: #f8fafc; border-color: #475569; }
+        /* تمييز حالة الزر النشط فقط للمتاح */
+        .btn.active-filter {
+            background: #0369a1 !important;
+            box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.35) !important;
+        }
+
+        /* إبراز زر حذف التحديد في مكان واضح */
+        .reset-btn-wrapper {
+            margin-right: auto;
+        }
+
+        .btn-reset-prominent {
+            background: #ffffff !important;
+            color: #dc2626 !important;
+            border: 2px solid #ef4444 !important;
+            font-weight: 800 !important;
+            box-shadow: 0 2px 6px rgba(239, 68, 68, 0.15) !important;
+        }
+
+        body.dark-mode .btn-reset-prominent {
+            background: #1e293b !important;
+            color: #f87171 !important;
+            border-color: #f87171 !important;
+        }
+
+        .btn-reset-prominent:hover {
+            background: #ef4444 !important;
+            color: #ffffff !important;
+        }
 
         /* شريط الإحصائيات الرئيسي */
         .stats-summary-card {
@@ -544,96 +573,8 @@
 
         .modal-title { font-size: 20px; font-weight: 900; margin-bottom: 12px; color: #0284c7; text-align: center; }
         .modal-btn-close {
-            background: #ef4444; color: #ffffff; border: none; font-size: 13.5px; font-weight: 800;
+            background: #0284c7; color: #ffffff; border: none; font-size: 13.5px; font-weight: 800;
             padding: 8px 22px; border-radius: 20px; cursor: pointer; display: block; margin: 16px auto 0 auto;
-        }
-
-        /* كرت الستوري */
-        .story-container {
-            width: 320px;
-            height: 568px;
-            background: linear-gradient(145deg, #0f172a, #1e293b);
-            border-radius: 24px;
-            padding: 28px 20px;
-            margin: 0 auto;
-            color: #ffffff;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            position: relative;
-            overflow: hidden;
-            border: 2px solid #38bdf8;
-        }
-
-        .story-badge-uni {
-            font-size: 13px;
-            font-weight: 800;
-            color: #38bdf8;
-            letter-spacing: 0.5px;
-        }
-
-        .story-title {
-            font-size: 21px;
-            font-weight: 900;
-            color: #ffffff;
-            margin-top: 6px;
-        }
-
-        .story-circle-wrapper {
-            width: 170px;
-            height: 170px;
-            margin: 16px auto;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(2, 132, 199, 0.2) 0%, rgba(15, 23, 42, 0.8) 70%);
-            border: 4px solid #10b981;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 0 25px rgba(16, 185, 129, 0.35);
-        }
-
-        .story-circle-percent {
-            font-size: 42px;
-            font-weight: 900;
-            color: #ffffff;
-            line-height: 1;
-        }
-
-        .story-circle-label {
-            font-size: 12px;
-            font-weight: 700;
-            color: #94a3b8;
-            margin-top: 4px;
-        }
-
-        .story-details-box {
-            background: rgba(255, 255, 255, 0.06);
-            border-radius: 14px;
-            padding: 12px;
-            display: flex;
-            justify-content: space-around;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .story-stat-number {
-            font-size: 20px;
-            font-weight: 900;
-            color: #38bdf8;
-        }
-
-        .story-stat-title {
-            font-size: 11px;
-            color: #94a3b8;
-            font-weight: 700;
-        }
-
-        .story-footer-text {
-            font-size: 11.5px;
-            color: #64748b;
-            font-weight: 700;
         }
 
         @media print {
@@ -646,6 +587,9 @@
             body { padding: 6px; }
             .wrapper { padding: 10px; }
             .toolbar-top-row { justify-content: center; }
+            .buttons-group { justify-content: center; }
+            .reset-btn-wrapper { margin-right: 0; width: 100%; text-align: center; }
+            .btn-reset-prominent { width: 100%; justify-content: center; }
             .controls-sub-row { flex-direction: column; align-items: stretch; }
             .search-box-wrap { max-width: 100%; }
             .three-arrows-container { display: none; }
@@ -699,7 +643,7 @@
 
                 <div class="stat-item">
                     <span>متطلبات الجامعة المنجزة:</span>
-                    <span class="stat-badge" id="passed-uni-badge" style="background:#fef3c7; color:#b45309;">0</span>
+                    <span class="stat-badge" id="passed-uni-badge" style="background:#e0f2fe; color:#0284c7;">0</span>
                     <span style="font-size: 12px; color: #64748b;">من 30</span>
                 </div>
 
@@ -717,18 +661,21 @@
             </div>
         </div>
 
-        <!-- أزرار الإجراءات مع زر تثبيت كتطبيق متاح دائماً -->
+        <!-- أزرار الإجراءات بلون موحد وزر مسح التحديد في مكان واضح وبارز -->
         <div class="toolbar-top-row" style="margin-top: 4px;">
             <div class="buttons-group">
-                <button class="btn btn-install" onclick="installAppDirectly()">📲 تثبيت كتطبيق</button>
-                <button class="btn btn-available" id="btn-toggle-available" onclick="toggleAvailableCourses()">🔓 المتاح للتسجيل</button>
-                <button class="btn btn-story" onclick="openStoryModal()">📸 بطاقة إنجازي (ستوري)</button>
-                <button class="btn btn-report" onclick="printPassedCoursesReport()">📄 تقرير بالمواد المجتازة</button>
-                <button class="btn btn-print" onclick="window.print()">🖨️ طباعة الخطة</button>
-                <button class="btn btn-dark" id="btn-dark-mode" onclick="toggleDarkMode()">🌙 النمط الليلي</button>
-                <button class="btn btn-share" onclick="openShareModal()">📲 مشاركة</button>
-                <button class="btn btn-reset" onclick="resetAllCourses()">🔄 مسح التحديد</button>
-                <button class="btn btn-download" onclick="downloadImage()">📥 تحميل الخطة (PNG)</button>
+                <button class="btn" onclick="installAppDirectly()">📲 تثبيت كتطبيق</button>
+                <button class="btn" id="btn-toggle-available" onclick="toggleAvailableCourses()">🔓 المتاح للتسجيل</button>
+                <button class="btn" onclick="printPassedCoursesReport()">📄 تقرير بالمواد المجتازة</button>
+                <button class="btn" onclick="downloadImage()">📥 تحميل كصورة</button>
+                <button class="btn" onclick="window.print()">🖨️ طباعة الخطة</button>
+                <button class="btn" id="btn-dark-mode" onclick="toggleDarkMode()">🌙 النمط الليلي</button>
+                <button class="btn" onclick="openShareModal()">📲 مشاركة</button>
+            </div>
+            
+            <!-- زر مسح التحديد في مكان بارز ومستقل -->
+            <div class="reset-btn-wrapper">
+                <button class="btn btn-reset-prominent" onclick="resetAllCourses()">🔄 مسح كل التحديد</button>
             </div>
         </div>
 
@@ -1005,48 +952,7 @@
         </div>
     </div>
 
-    <!-- نافذة 1: بطاقة الستوري لمشاركتها كصورة -->
-    <div class="modal-overlay" id="storyModal">
-        <div class="modal-box" style="text-align: center; max-width: 380px;">
-            <div class="modal-title">📸 بطاقة إنجازي (ستوري)</div>
-            <p style="font-size: 12.5px; color: #64748b; margin-bottom: 12px;">بطاقة مخصصة بدقة عالية لمشاركتها على حالات واتساب وإنستغرام</p>
-            
-            <div id="storyCardCapture" class="story-container">
-                <div>
-                    <div class="story-badge-uni">جامعة عمان العربية • كلية الشريعة</div>
-                    <div class="story-title">خطة الفقه وأصوله</div>
-                </div>
-
-                <div class="story-circle-wrapper">
-                    <div class="story-circle-percent" id="storyPercent">0%</div>
-                    <div class="story-circle-label">نسبة الإنجاز</div>
-                </div>
-
-                <div>
-                    <div class="story-details-box">
-                        <div>
-                            <div class="story-stat-number" id="storyPassedHours">0</div>
-                            <div class="story-stat-title">ساعات منجزة</div>
-                        </div>
-                        <div style="width: 1px; background: rgba(255,255,255,0.15);"></div>
-                        <div>
-                            <div class="story-stat-number" id="storyRemainingHours">132</div>
-                            <div class="story-stat-title">ساعات متبقية</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="story-footer-text">
-                    إنجاز أكاديمي مستمر 🌿 • خطة الفقه التفاعلية
-                </div>
-            </div>
-
-            <button class="btn btn-download" style="margin: 16px auto 0 auto; width: 100%; justify-content: center; padding: 9px;" onclick="downloadStoryImage()">📥 تحميل بطاقة الستوري كصورة</button>
-            <button class="modal-btn-close" onclick="closeModal('storyModal')">إغلاق</button>
-        </div>
-    </div>
-
-    <!-- نافذة 2: نافذة المشاركة -->
+    <!-- نافذة المشاركة -->
     <div class="modal-overlay" id="shareModal">
         <div class="modal-box" style="text-align: center;">
             <div class="modal-title">📲 مشاركة الخطة مع زملائك</div>
@@ -1054,14 +960,14 @@
                 شارك رابط الخطة التفاعلية مع زملائك في كلية الشريعة وقروبات الدفعة للاستفادة منها:
             </p>
             <div style="display: flex; flex-direction: column; gap: 10px;">
-                <button class="btn btn-share" style="justify-content: center; padding: 10px; font-size: 14px;" onclick="shareDirectWhatsApp()">💬 مشاركة عبر واتساب</button>
-                <button class="btn btn-download" style="justify-content: center; padding: 10px; font-size: 14px;" onclick="copyPlanLink()">📋 نسخ رابط الخطة</button>
+                <button class="btn" style="justify-content: center; padding: 10px; font-size: 14px;" onclick="shareDirectWhatsApp()">💬 مشاركة عبر واتساب</button>
+                <button class="btn" style="justify-content: center; padding: 10px; font-size: 14px;" onclick="copyPlanLink()">📋 نسخ رابط الخطة</button>
             </div>
             <button class="modal-btn-close" onclick="closeModal('shareModal')">إغلاق</button>
         </div>
     </div>
 
-    <!-- نافذة 3: تهنئة التخرج -->
+    <!-- نافذة تهنئة التخرج -->
     <div class="modal-overlay" id="gradModal">
         <div class="modal-box" style="text-align: center; border-color: #10b981;">
             <div style="font-size: 55px;">🎓</div>
@@ -1282,11 +1188,11 @@
             showAvailableState = !showAvailableState;
             const btn = document.getElementById('btn-toggle-available');
             if (showAvailableState) {
-                btn.classList.add('active');
+                btn.classList.add('active-filter');
                 btn.textContent = '🔒 إخفاء المتاح';
                 applyAvailableHighlight();
             } else {
-                btn.classList.remove('active');
+                btn.classList.remove('active-filter');
                 btn.textContent = '🔓 المتاح للتسجيل';
                 document.querySelectorAll('.box').forEach(b => b.classList.remove('dimmed-unavailable'));
             }
@@ -1341,29 +1247,6 @@
         function updateDarkModeBtnText(isDark) {
             const btn = document.getElementById('btn-dark-mode');
             if (btn) btn.textContent = isDark ? '☀️ النمط النهاري' : '🌙 النمط الليلي';
-        }
-
-        function openStoryModal() {
-            const percent = Math.min(100, Math.round((totalHours / 132) * 100));
-            const remaining = Math.max(0, 132 - totalHours);
-            document.getElementById('storyPercent').textContent = percent + '%';
-            document.getElementById('storyPassedHours').textContent = totalHours;
-            document.getElementById('storyRemainingHours').textContent = remaining;
-            document.getElementById('storyModal').style.display = 'flex';
-        }
-
-        function downloadStoryImage() {
-            const element = document.getElementById('storyCardCapture');
-            html2canvas(element, {
-                scale: 3,
-                useCORS: true,
-                backgroundColor: null
-            }).then(canvas => {
-                const link = document.createElement('a');
-                link.download = `ستوري_إنجاز_الفقه_${totalHours}_ساعة.png`;
-                link.href = canvas.toDataURL('image/png');
-                link.click();
-            });
         }
 
         function printPassedCoursesReport() {
