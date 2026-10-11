@@ -10,7 +10,12 @@
     <style>
         :root {
             --bg-page: #f1f5f9;
-            --panel-bg: #ffffff;
+            --wrapper-bg: #ffffff;
+            --text-main: #0f172a;
+            --section-bg: #f8fafc;
+            --border-color: #e2e8f0;
+            --card-bg: #f0fdfa;
+            --card-border: #99f6e4;
             
             --box-root: #e0f2fe;
             --border-root: #0284c7;
@@ -30,15 +35,42 @@
 
             --done-root-bg: #0369a1;
             --done-root-border: #075985;
-
             --done-mand-bg: #15803d;
             --done-mand-border: #166534;
-
             --done-opt-bg: #b45309;
             --done-opt-border: #92400e;
-
             --done-free-bg: #334155;
             --done-free-border: #1e293b;
+            
+            --arrow-stroke: #10b981;
+        }
+
+        body.dark-mode {
+            --bg-page: #0f172a;
+            --wrapper-bg: #1e293b;
+            --text-main: #f8fafc;
+            --section-bg: #0f172a;
+            --border-color: #334155;
+            --card-bg: #132e35;
+            --card-border: #115e59;
+
+            --box-root: #0c4a6e;
+            --border-root: #38bdf8;
+            --text-root: #e0f2fe;
+
+            --box-mandatory: #14532d;
+            --border-mandatory: #4ade80;
+            --text-mandatory: #f0fdf4;
+
+            --box-optional: #713f12;
+            --border-optional: #facc15;
+            --text-optional: #fefce8;
+
+            --box-free: #1e293b;
+            --border-free: #475569;
+            --text-free: #e2e8f0;
+
+            --arrow-stroke: #34d399;
         }
 
         * { 
@@ -53,13 +85,20 @@
         body { 
             background-color: var(--bg-page); 
             padding: 12px; 
-            color: #0f172a; 
+            color: var(--text-main); 
             direction: rtl; 
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         
         .toolbar {
             max-width: 1100px;
             margin: 0 auto 12px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .toolbar-top-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -71,20 +110,51 @@
             display: flex;
             gap: 8px;
             flex-wrap: wrap;
+            align-items: center;
         }
 
         .btn {
             border: none;
-            padding: 8px 18px;
-            font-size: 13.5px;
+            padding: 7px 15px;
+            font-size: 13px;
             font-weight: 700;
             border-radius: 20px;
             cursor: pointer;
             transition: all 0.2s ease;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.06);
             display: inline-flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            filter: brightness(0.95);
+        }
+
+        .btn-available {
+            background: #f59e0b;
+            color: #ffffff;
+        }
+
+        .btn-available.active {
+            background: #b45309;
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.4);
+        }
+
+        .btn-dark {
+            background: #334155;
+            color: #ffffff;
+        }
+
+        .btn-whatsapp {
+            background: #25d366;
+            color: #ffffff;
+        }
+
+        .btn-reset {
+            background: #ef4444;
+            color: #ffffff;
         }
 
         .btn-download {
@@ -98,46 +168,130 @@
             border: 1px solid #cbd5e1;
         }
 
-        .btn-reset {
-            background: #ef4444;
-            color: #ffffff;
-            border: 1px solid #dc2626;
+        body.dark-mode .btn-print {
+            background: #1e293b;
+            color: #f8fafc;
+            border-color: #475569;
         }
 
-        .btn:hover {
-            transform: translateY(-1px);
-            filter: brightness(0.95);
+        /* شريط البحث وتفاصيل الإنجاز */
+        .controls-sub-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .search-box-wrap {
+            position: relative;
+            flex: 1;
+            max-width: 320px;
+            min-width: 220px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 8px 14px 8px 34px;
+            border-radius: 20px;
+            border: 1.5px solid var(--border-color);
+            background: var(--wrapper-bg);
+            color: var(--text-main);
+            font-size: 13px;
+            font-weight: 700;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .search-input:focus {
+            border-color: #0284c7;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 14px;
+            opacity: 0.6;
+        }
+
+        /* شريط التقدم */
+        .progress-card {
+            background: var(--wrapper-bg);
+            border: 1.5px solid var(--border-color);
+            border-radius: 12px;
+            padding: 10px 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            flex: 2;
+            min-width: 280px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+
+        .progress-labels {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 10px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        body.dark-mode .progress-bar-container {
+            background: #334155;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #0284c7, #10b981);
+            border-radius: 10px;
+            transition: width 0.4s ease;
         }
 
         .hours-counter-badge {
-            background: #ffffff;
+            background: var(--wrapper-bg);
             border: 2px solid #0284c7;
             border-radius: 12px;
-            padding: 8px 16px;
+            padding: 8px 14px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             box-shadow: 0 2px 8px rgba(2, 132, 199, 0.15);
             flex-wrap: wrap;
         }
 
         .counter-label {
-            font-size: 13.5px;
+            font-size: 13px;
             font-weight: 800;
-            color: #1e293b;
         }
 
         .counter-number {
-            font-size: 19px;
+            font-size: 18px;
             font-weight: 900;
             color: #0284c7;
             background: #e0f2fe;
-            padding: 2px 10px;
-            border-radius: 10px;
+            padding: 2px 9px;
+            border-radius: 8px;
+        }
+
+        body.dark-mode .counter-number {
+            background: #0369a1;
+            color: #ffffff;
         }
 
         .counter-note {
-            font-size: 12px;
+            font-size: 11.5px;
             font-weight: 700;
             color: #0369a1;
             background: #f0fdf4;
@@ -146,26 +300,33 @@
             border-radius: 6px;
         }
 
+        body.dark-mode .counter-note {
+            background: #14532d;
+            color: #86efac;
+            border-color: #166534;
+        }
+
         .wrapper { 
             max-width: 1100px; 
             margin: 0 auto; 
-            background: #ffffff !important; 
-            border: 1.5px solid #e2e8f0; 
+            background: var(--wrapper-bg) !important; 
+            border: 1.5px solid var(--border-color); 
             border-radius: 14px; 
             padding: 16px; 
             box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            transition: background 0.3s ease;
         }
         
         .header { 
             text-align: center;
             margin-bottom: 14px; 
-            border-bottom: 1.5px solid #f1f5f9; 
+            border-bottom: 1.5px solid var(--border-color); 
             padding-bottom: 12px; 
         }
 
         .header h1 { 
             font-size: 25px; 
-            color: #0f172a; 
+            color: var(--text-main); 
             font-weight: 900;
             letter-spacing: -0.3px;
         }
@@ -178,16 +339,16 @@
         }
 
         .section { 
-            background: #f8fafc; 
-            border: 1px solid #e2e8f0; 
+            background: var(--section-bg); 
+            border: 1px solid var(--border-color); 
             border-radius: 10px; 
             padding: 12px; 
             margin-bottom: 12px; 
         }
 
         .card { 
-            background: #f0fdfa !important; 
-            border: 1.5px solid #99f6e4 !important; 
+            background: var(--card-bg) !important; 
+            border: 1.5px solid var(--card-border) !important; 
             border-radius: 8px; 
             padding: 8px; 
             box-shadow: 0 2px 5px rgba(15, 118, 110, 0.04);
@@ -207,6 +368,7 @@
             transition: all 0.22s ease;
             user-select: none;
             cursor: pointer;
+            position: relative;
         }
 
         .box.root-course { 
@@ -268,6 +430,30 @@
             color: #ffffff !important;
         }
 
+        /* إضاءة المادة المتاحة للتسجيل */
+        @keyframes pulseAvailable {
+            0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7); }
+            70% { box-shadow: 0 0 0 8px rgba(245, 158, 11, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+        }
+
+        .box.is-available-highlight {
+            border: 2px solid #f59e0b !important;
+            animation: pulseAvailable 1.8s infinite;
+        }
+
+        /* خفوت المادة عند البحث */
+        .box.search-dimmed {
+            opacity: 0.18;
+            filter: grayscale(80%);
+        }
+
+        .box.search-matched {
+            outline: 2.5px solid #0284c7;
+            transform: scale(1.02);
+            z-index: 10;
+        }
+
         .check-box {
             width: 16px;
             height: 16px;
@@ -279,6 +465,10 @@
             align-items: center;
             justify-content: center;
             transition: all 0.2s ease;
+        }
+
+        body.dark-mode .check-box {
+            background: rgba(0, 0, 0, 0.3);
         }
 
         .box.completed .check-box {
@@ -311,6 +501,12 @@
             box-shadow: 0 1px 4px rgba(29, 78, 216, 0.12);
         }
 
+        body.dark-mode .info-strip-header {
+            background: #1e3a8a;
+            color: #dbeafe;
+            border-color: #3b82f6;
+        }
+
         .notice-banner {
             background: #fef08a;
             border: 2px solid #b45309;
@@ -322,6 +518,12 @@
             font-weight: 900;
             text-align: center;
             box-shadow: 0 1px 4px rgba(180, 83, 9, 0.12);
+        }
+
+        body.dark-mode .notice-banner {
+            background: #78350f;
+            color: #fef08a;
+            border-color: #d97706;
         }
 
         .svg-arrow {
@@ -376,21 +578,21 @@
             justify-content: center; 
             margin-top: 12px; 
             padding-top: 10px; 
-            border-top: 1px solid #e2e8f0; 
+            border-top: 1px solid var(--border-color); 
             font-size: 11.5px; 
             flex-wrap: wrap;
         }
-        .legend-item { display: flex; align-items: center; gap: 5px; color: #1e293b; font-weight: 700; }
+        .legend-item { display: flex; align-items: center; gap: 5px; color: var(--text-main); font-weight: 700; }
         .badge { width: 14px; height: 9px; border-radius: 2px; display: inline-block; }
 
         .developer-footer {
             margin-top: 16px;
             padding-top: 12px;
-            border-top: 1.5px dashed #cbd5e1;
+            border-top: 1.5px dashed var(--border-color);
             text-align: center;
             font-size: 13.5px;
             font-weight: 800;
-            color: #334155;
+            color: var(--text-main);
             line-height: 1.6;
         }
         .developer-footer .name {
@@ -429,6 +631,11 @@
             animation: popIn 0.35s ease-out forwards;
         }
 
+        body.dark-mode .grad-modal-content {
+            background: #1e293b;
+            color: #ffffff;
+        }
+
         @keyframes popIn {
             0% { transform: scale(0.7); opacity: 0; }
             100% { transform: scale(1); opacity: 1; }
@@ -446,11 +653,15 @@
             margin-bottom: 10px;
         }
 
+        body.dark-mode .grad-title {
+            color: #34d399;
+        }
+
         .grad-message {
             font-size: 16px;
             line-height: 1.6;
             font-weight: 700;
-            color: #1e293b;
+            color: var(--text-main);
             margin-bottom: 20px;
         }
 
@@ -475,7 +686,9 @@
             body { padding: 6px; }
             .wrapper { padding: 10px; }
             .header h1 { font-size: 20px; }
-            .toolbar { justify-content: center; }
+            .toolbar-top-row { justify-content: center; }
+            .controls-sub-row { flex-direction: column; align-items: stretch; }
+            .search-box-wrap { max-width: 100%; }
             .three-arrows-container { display: none; }
             
             .grid-main-fiqh { grid-template-columns: 1fr; gap: 10px; }
@@ -488,18 +701,41 @@
 </head>
 <body>
 
-    <!-- شريط الأدوات والعداد مع زر إعادة التعيين -->
+    <!-- شريط الأدوات والتحكم الشامل -->
     <div class="toolbar">
-        <div class="hours-counter-badge">
-            <span class="counter-label">الساعات المقطوعة:</span>
-            <span class="counter-number" id="passed-hours">0</span>
-            <span class="counter-label">من أصل 102 ساعة</span>
-            <span class="counter-note">💡 الساعات المتبقية (30 ساعة) تتوزع على متطلبات الجامعة</span>
+        <div class="toolbar-top-row">
+            <div class="hours-counter-badge">
+                <span class="counter-label">الساعات المقطوعة:</span>
+                <span class="counter-number" id="passed-hours">0</span>
+                <span class="counter-label">من 102 ساعة</span>
+                <span class="counter-note">💡 الـ 30 ساعة المتبقية هي متطلبات الجامعة</span>
+            </div>
+            <div class="buttons-group">
+                <button class="btn btn-available" id="btn-toggle-available" onclick="toggleAvailableCourses()">🔓 المتاح للتسجيل</button>
+                <button class="btn btn-dark" id="btn-dark-mode" onclick="toggleDarkMode()">🌙 النمط الليلي</button>
+                <button class="btn btn-whatsapp" onclick="shareOnWhatsApp()">📲 مشاركة الخطة</button>
+                <button class="btn btn-reset" onclick="resetAllCourses()">🔄 مسح التحديد</button>
+                <button class="btn btn-download" onclick="downloadImage()">📥 تحميل (PNG)</button>
+                <button class="btn btn-print" onclick="window.print()">🖨️ طباعة</button>
+            </div>
         </div>
-        <div class="buttons-group">
-            <button class="btn btn-reset" onclick="resetAllCourses()">🔄 مسح التحديد</button>
-            <button class="btn btn-download" onclick="downloadImage()">📥 تحميل كصورة (PNG)</button>
-            <button class="btn btn-print" onclick="window.print()">🖨️ طباعة</button>
+
+        <div class="controls-sub-row">
+            <!-- شريط نسبة الإنجاز المئوية -->
+            <div class="progress-card">
+                <div class="progress-labels">
+                    <span>نسبة إنجاز ساعات التخصص:</span>
+                    <span id="progress-percentage-text" style="color: #0284c7; font-weight: 900;">0%</span>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill" id="progress-bar"></div>
+                </div>
+            </div>
+
+            <!-- خانة البحث السريع عن المواد -->
+            <div class="search-box-wrap">
+                <input type="text" class="search-input" id="courseSearchInput" placeholder="🔍 ابحث عن اسم أي مادة..." oninput="searchCourses()">
+            </div>
         </div>
     </div>
 
@@ -517,9 +753,9 @@
             </div>
 
             <div class="three-arrows-container">
-                <div class="branch-arrow-item"><svg viewBox="0 0 10 18" width="12" height="18"><line x1="5" y1="0" x2="5" y2="12" stroke="#10b981" stroke-width="2"/><polygon points="1,10 5,18 9,10" fill="#10b981"/></svg></div>
-                <div class="branch-arrow-item"><svg viewBox="0 0 10 18" width="12" height="18"><line x1="5" y1="0" x2="5" y2="12" stroke="#10b981" stroke-width="2"/><polygon points="1,10 5,18 9,10" fill="#10b981"/></svg></div>
-                <div class="branch-arrow-item"><svg viewBox="0 0 10 18" width="12" height="18"><line x1="5" y1="0" x2="5" y2="12" stroke="#10b981" stroke-width="2"/><polygon points="1,10 5,18 9,10" fill="#10b981"/></svg></div>
+                <div class="branch-arrow-item"><svg viewBox="0 0 10 18" width="12" height="18"><line x1="5" y1="0" x2="5" y2="12" stroke="var(--arrow-stroke)" stroke-width="2"/><polygon points="1,10 5,18 9,10" fill="var(--arrow-stroke)"/></svg></div>
+                <div class="branch-arrow-item"><svg viewBox="0 0 10 18" width="12" height="18"><line x1="5" y1="0" x2="5" y2="12" stroke="var(--arrow-stroke)" stroke-width="2"/><polygon points="1,10 5,18 9,10" fill="var(--arrow-stroke)"/></svg></div>
+                <div class="branch-arrow-item"><svg viewBox="0 0 10 18" width="12" height="18"><line x1="5" y1="0" x2="5" y2="12" stroke="var(--arrow-stroke)" stroke-width="2"/><polygon points="1,10 5,18 9,10" fill="var(--arrow-stroke)"/></svg></div>
             </div>
 
             <div class="grid-main-fiqh">
@@ -530,14 +766,14 @@
                     </div>
                     <div class="grid-osool-subs" style="margin-top: 4px;">
                         <div class="col">
-                            <div class="svg-arrow"><svg viewBox="0 0 10 14"><line x1="5" y1="0" x2="5" y2="9" stroke="#10b981" stroke-width="2"/><polygon points="1,8 5,14 9,8" fill="#10b981"/></svg></div>
+                            <div class="svg-arrow"><svg viewBox="0 0 10 14"><line x1="5" y1="0" x2="5" y2="9" stroke="var(--arrow-stroke)" stroke-width="2"/><polygon points="1,8 5,14 9,8" fill="var(--arrow-stroke)"/></svg></div>
                             <div class="box mand-course" id="box-osool-3" data-hours="3" onclick="toggleCourse('box-osool-3', 'box-osool-1', 'علم أصول الفقه الإسلامي (1)', false)">
                                 <span class="box-title-text">علم أصول الفقه (3)</span>
                                 <span class="check-box"></span>
                             </div>
                         </div>
                         <div class="col">
-                            <div class="svg-arrow"><svg viewBox="0 0 10 14"><line x1="5" y1="0" x2="5" y2="9" stroke="#10b981" stroke-width="2"/><polygon points="1,8 5,14 9,8" fill="#10b981"/></svg></div>
+                            <div class="svg-arrow"><svg viewBox="0 0 10 14"><line x1="5" y1="0" x2="5" y2="9" stroke="var(--arrow-stroke)" stroke-width="2"/><polygon points="1,8 5,14 9,8" fill="var(--arrow-stroke)"/></svg></div>
                             <div class="box mand-course" id="box-fiqh-muqaran" data-hours="3" onclick="toggleCourse('box-fiqh-muqaran', 'box-osool-1', 'علم أصول الفقه الإسلامي (1)', false)">
                                 <span class="box-title-text">مسائل في الفقه المقارن</span>
                                 <span class="check-box"></span>
@@ -558,7 +794,7 @@
                         <span class="box-title-text">فقه المعاملات المالية (1)</span>
                         <span class="check-box"></span>
                     </div>
-                    <div class="svg-arrow"><svg viewBox="0 0 10 14"><line x1="5" y1="0" x2="5" y2="9" stroke="#10b981" stroke-width="2"/><polygon points="1,8 5,14 9,8" fill="#10b981"/></svg></div>
+                    <div class="svg-arrow"><svg viewBox="0 0 10 14"><line x1="5" y1="0" x2="5" y2="9" stroke="var(--arrow-stroke)" stroke-width="2"/><polygon points="1,8 5,14 9,8" fill="var(--arrow-stroke)"/></svg></div>
                     <div class="box mand-course" id="box-muamalat-2" data-hours="3" onclick="toggleCourse('box-muamalat-2', 'box-muamalat-1', 'فقه المعاملات المالية (1)', false)">
                         <span class="box-title-text">فقه المعاملات المالية (2)</span>
                         <span class="check-box"></span>
@@ -595,7 +831,7 @@
                         <span class="box-title-text">فقه الطهارة</span>
                         <span class="check-box"></span>
                     </div>
-                    <div class="svg-arrow"><svg viewBox="0 0 10 14"><line x1="5" y1="0" x2="5" y2="9" stroke="#10b981" stroke-width="2"/><polygon points="1,8 5,14 9,8" fill="#10b981"/></svg></div>
+                    <div class="svg-arrow"><svg viewBox="0 0 10 14"><line x1="5" y1="0" x2="5" y2="9" stroke="var(--arrow-stroke)" stroke-width="2"/><polygon points="1,8 5,14 9,8" fill="var(--arrow-stroke)"/></svg></div>
                     <div class="box mand-course" id="box-salah" data-hours="3" onclick="toggleCourse('box-salah', 'box-tahara', 'فقه الطهارة', false)">
                         <span class="box-title-text">فقه الصلاة</span>
                         <span class="check-box"></span>
@@ -608,7 +844,7 @@
                         <span class="box-title-text">فقه الأحوال الشخصية (1)</span>
                         <span class="check-box"></span>
                     </div>
-                    <div class="svg-arrow"><svg viewBox="0 0 10 14"><line x1="5" y1="0" x2="5" y2="9" stroke="#10b981" stroke-width="2"/><polygon points="1,8 5,14 9,8" fill="#10b981"/></svg></div>
+                    <div class="svg-arrow"><svg viewBox="0 0 10 14"><line x1="5" y1="0" x2="5" y2="9" stroke="var(--arrow-stroke)" stroke-width="2"/><polygon points="1,8 5,14 9,8" fill="var(--arrow-stroke)"/></svg></div>
                     <div class="box mand-course" id="box-ahwal-2" data-hours="3" onclick="toggleCourse('box-ahwal-2', 'box-ahwal-1', 'فقه الأحوال الشخصية (1)', false)">
                         <span class="box-title-text">فقه الأحوال الشخصية (2)</span>
                         <span class="check-box"></span>
@@ -621,12 +857,12 @@
                         <span class="box-title-text">التلاوة والحفظ (1)</span>
                         <span class="check-box"></span>
                     </div>
-                    <div class="svg-arrow"><svg viewBox="0 0 10 14"><line x1="5" y1="0" x2="5" y2="9" stroke="#10b981" stroke-width="2"/><polygon points="1,8 5,14 9,8" fill="#10b981"/></svg></div>
+                    <div class="svg-arrow"><svg viewBox="0 0 10 14"><line x1="5" y1="0" x2="5" y2="9" stroke="var(--arrow-stroke)" stroke-width="2"/><polygon points="1,8 5,14 9,8" fill="var(--arrow-stroke)"/></svg></div>
                     <div class="box mand-course" id="box-tilawa-2" data-hours="1" onclick="toggleCourse('box-tilawa-2', 'box-tilawa-1', 'التلاوة والحفظ (1)', false)">
                         <span class="box-title-text">التلاوة والحفظ (2)</span>
                         <span class="check-box"></span>
                     </div>
-                    <div class="svg-arrow"><svg viewBox="0 0 10 14"><line x1="5" y1="0" x2="5" y2="9" stroke="#10b981" stroke-width="2"/><polygon points="1,8 5,14 9,8" fill="#10b981"/></svg></div>
+                    <div class="svg-arrow"><svg viewBox="0 0 10 14"><line x1="5" y1="0" x2="5" y2="9" stroke="var(--arrow-stroke)" stroke-width="2"/><polygon points="1,8 5,14 9,8" fill="var(--arrow-stroke)"/></svg></div>
                     <div class="box mand-course" id="box-tilawa-3" data-hours="1" onclick="toggleCourse('box-tilawa-3', 'box-tilawa-2', 'التلاوة والحفظ (2)', false)">
                         <span class="box-title-text">التلاوة والحفظ (3)</span>
                         <span class="check-box"></span>
@@ -641,12 +877,12 @@
                     </div>
                     <div style="height: 14px; width: 100%;">
                         <svg width="100%" height="14" viewBox="0 0 100 14" preserveAspectRatio="none">
-                            <line x1="50" y1="0" x2="50" y2="5" stroke="#10b981" stroke-width="2"/>
-                            <line x1="25" y1="5" x2="75" y2="5" stroke="#10b981" stroke-width="2"/>
-                            <line x1="25" y1="5" x2="25" y2="12" stroke="#10b981" stroke-width="2"/>
-                            <polygon points="22,10 25,14 28,10" fill="#10b981"/>
-                            <line x1="75" y1="5" x2="75" y2="12" stroke="#10b981" stroke-width="2"/>
-                            <polygon points="72,10 75,14 78,10" fill="#10b981"/>
+                            <line x1="50" y1="0" x2="50" y2="5" stroke="var(--arrow-stroke)" stroke-width="2"/>
+                            <line x1="25" y1="5" x2="75" y2="5" stroke="var(--arrow-stroke)" stroke-width="2"/>
+                            <line x1="25" y1="5" x2="25" y2="12" stroke="var(--arrow-stroke)" stroke-width="2"/>
+                            <polygon points="22,10 25,14 28,10" fill="var(--arrow-stroke)"/>
+                            <line x1="75" y1="5" x2="75" y2="12" stroke="var(--arrow-stroke)" stroke-width="2"/>
+                            <polygon points="72,10 75,14 78,10" fill="var(--arrow-stroke)"/>
                         </svg>
                     </div>
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px;">
@@ -669,12 +905,10 @@
                     </div>
                     <div style="height: 14px; width: 100%;">
                         <svg width="100%" height="14" viewBox="0 0 100 14" preserveAspectRatio="none">
-                            <line x1="50" y1="0" x2="50" y2="5" stroke="#10b981" stroke-width="2"/>
-                            <line x1="25" y1="5" x2="75" y2="5" stroke="#10b981" stroke-width="2"/>
-                            <line x1="25" y1="5" x2="25" y2="12" stroke="#10b981" stroke-width="2"/>
-                            <polygon points="22,10 25,14 28,10" fill="#10b981"/>
-                            <line x1="75" y1="5" x2="75" y2="12" stroke="#10b981" stroke-width="2"/>
-                            <polygon points="72,10 75,14 78,10" fill="#10b981"/>
+                            <line x1="50" y1="0" x2="50" y2="5" stroke="var(--arrow-stroke)" stroke-width="2"/>
+                            <line x1="25" y1="5" x2="75" y2="5" stroke="var(--arrow-stroke)" stroke-width="2"/>
+                            <line x1="25" y1="5" x2="25" y2="12" stroke="var(--arrow-stroke)" stroke-width="2"/><polygon points="22,10 25,14 28,10" fill="var(--arrow-stroke)"/>
+                            <line x1="75" y1="5" x2="75" y2="12" stroke="var(--arrow-stroke)" stroke-width="2"/><polygon points="72,10 75,14 78,10" fill="var(--arrow-stroke)"/>
                         </svg>
                     </div>
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px;">
@@ -736,6 +970,7 @@
             <div class="legend-item"><span class="badge" style="background:#fefce8; border:1px dashed #fde047;"></span> اختياري تخصص (مادتان فقط)</div>
             <div class="legend-item"><span class="badge" style="background:#f8fafc; border:1px solid #cbd5e1;"></span> بدون متطلب سابق</div>
             <div class="legend-item"><span class="badge" style="background:#0369a1; border:1px solid #075985;"></span> مادة منجزة (تصبح أغمق)</div>
+            <div class="legend-item"><span class="badge" style="background:transparent; border:2px solid #f59e0b;"></span> مادة مفتوحة ومؤهل لتسجيلها</div>
         </div>
 
         <!-- التذييل -->
@@ -751,7 +986,7 @@
             <div class="grad-title">مبارك التخرج!</div>
             <div class="grad-message">
                 نفع الله بك وبارك الله فيك، ووفقك لخدمة دينه وأمته.<br>
-                أتممت بحمد الله جميع ساعات تخصص الفقه وأصوله (132 ساعة معتمدة) بنجاح.
+                أتممت بحمد الله جميع ساعات تخصص الفقه وأصوله (102 ساعة تخصص) بنجاح.
             </div>
             <button class="grad-btn-close" onclick="closeGradModal()">تقبّل الله ونفع بكم 🌿</button>
         </div>
@@ -760,7 +995,58 @@
     <script>
         let totalHours = 0;
         let graduationCelebrated = false;
+        let showAvailableState = false;
 
+        // خريطة المتطلبات السابقة لكل مادة
+        const prerequisitesMap = {
+            'box-osool-1': 'box-madkhal-fiqh',
+            'box-osool-2': 'box-madkhal-fiqh',
+            'box-osool-3': 'box-osool-1',
+            'box-fiqh-muqaran': 'box-osool-1',
+            'box-ai-fiqh': 'box-osool-1',
+            'box-muamalat-1': 'box-madkhal-fiqh',
+            'box-muamalat-2': 'box-muamalat-1',
+            'box-uqubat': 'box-madkhal-fiqh',
+            'box-qadaa': 'box-madkhal-fiqh',
+            'box-madani': 'box-madkhal-fiqh',
+            'box-salah': 'box-tahara',
+            'box-ahwal-2': 'box-ahwal-1',
+            'box-tilawa-2': 'box-tilawa-1',
+            'box-tilawa-3': 'box-tilawa-2',
+            'box-hadith-takhrij': 'box-hadith-ulum',
+            'box-hadith-tahlili': 'box-hadith-ulum',
+            'box-aqeedah-main': 'box-madkhal-aqeedah',
+            'box-firaq': 'box-madkhal-aqeedah',
+            'box-qiraat-aqeedah': 'box-madkhal-aqeedah'
+        };
+
+        // 1. الحفظ التلقائي في LocalStorage
+        function saveProgress() {
+            const completedIds = [];
+            document.querySelectorAll('.box.completed').forEach(box => {
+                completedIds.push(box.id);
+            });
+            localStorage.setItem('fiqhPlanCompletedCourses', JSON.stringify(completedIds));
+        }
+
+        function loadProgress() {
+            const saved = localStorage.getItem('fiqhPlanCompletedCourses');
+            if (saved) {
+                try {
+                    const completedIds = JSON.parse(saved);
+                    completedIds.forEach(id => {
+                        const el = document.getElementById(id);
+                        if (el) el.classList.add('completed');
+                    });
+                } catch(e) {
+                    console.error(e);
+                }
+            }
+            updateHours();
+            reorderFreeCourses();
+        }
+
+        // 2. تحديث عداد الساعات والنسبة المئوية
         function updateHours() {
             totalHours = 0;
             const completedBoxes = document.querySelectorAll('.box.completed');
@@ -768,7 +1054,13 @@
                 const hours = parseInt(b.getAttribute('data-hours') || '3');
                 totalHours += hours;
             });
+
             document.getElementById('passed-hours').textContent = totalHours;
+
+            // تحديث النسبة المئوية
+            const percentage = Math.min(100, Math.round((totalHours / 102) * 100));
+            document.getElementById('progress-percentage-text').textContent = percentage + '%';
+            document.getElementById('progress-bar').style.width = percentage + '%';
 
             if (totalHours >= 102 && !graduationCelebrated) {
                 graduationCelebrated = true;
@@ -776,30 +1068,19 @@
             } else if (totalHours < 102) {
                 graduationCelebrated = false;
             }
+
+            if (showAvailableState) {
+                applyAvailableHighlight();
+            }
         }
 
         function triggerGraduation() {
             document.getElementById('gradModal').style.display = 'flex';
-
             if (typeof confetti === 'function') {
-                confetti({
-                    particleCount: 120,
-                    spread: 80,
-                    origin: { y: 0.6 }
-                });
+                confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
                 setTimeout(() => {
-                    confetti({
-                        particleCount: 150,
-                        angle: 60,
-                        spread: 60,
-                        origin: { x: 0 }
-                    });
-                    confetti({
-                        particleCount: 150,
-                        angle: 120,
-                        spread: 60,
-                        origin: { x: 1 }
-                    });
+                    confetti({ particleCount: 150, angle: 60, spread: 60, origin: { x: 0 } });
+                    confetti({ particleCount: 150, angle: 120, spread: 60, origin: { x: 1 } });
                 }, 300);
             }
         }
@@ -816,10 +1097,7 @@
             items.sort((a, b) => {
                 const aDone = a.classList.contains('completed') ? 1 : 0;
                 const bDone = b.classList.contains('completed') ? 1 : 0;
-
-                if (aDone !== bDone) {
-                    return bDone - aDone;
-                }
+                if (aDone !== bDone) return bDone - aDone;
                 const aOrder = parseInt(a.getAttribute('data-order') || '0');
                 const bOrder = parseInt(b.getAttribute('data-order') || '0');
                 return aOrder - bOrder;
@@ -828,31 +1106,14 @@
             items.forEach(item => grid.appendChild(item));
         }
 
-        // دالة مسح كل التحديد وإعادة تصفير الخطة
-        function resetAllCourses() {
-            const completedBoxes = document.querySelectorAll('.box.completed');
-            if (completedBoxes.length === 0) {
-                alert('الخطة غير محددة بالفعل!');
-                return;
-            }
-
-            if (confirm('هل أنت متأكد من رغبتك في إلغاء تحديد جميع المواد وإعادة ضبط الخطة؟')) {
-                completedBoxes.forEach(box => {
-                    box.classList.remove('completed');
-                });
-                graduationCelebrated = false;
-                closeGradModal();
-                updateHours();
-                reorderFreeCourses();
-            }
-        }
-
+        // 3. النقر على مادة معينة
         function toggleCourse(courseId, prereqId, prereqName, isElective) {
             const courseEl = document.getElementById(courseId);
             
             if (courseEl.classList.contains('completed')) {
                 courseEl.classList.remove('completed');
                 uncheckDependents(courseId);
+                saveProgress();
                 updateHours();
                 reorderFreeCourses();
                 return;
@@ -875,6 +1136,7 @@
             }
 
             courseEl.classList.add('completed');
+            saveProgress();
             updateHours();
             reorderFreeCourses();
         }
@@ -892,11 +1154,109 @@
             });
         }
 
+        // 4. زر مسح التحديد
+        function resetAllCourses() {
+            const completedBoxes = document.querySelectorAll('.box.completed');
+            if (completedBoxes.length === 0) {
+                alert('الخطة غير محددة بالفعل!');
+                return;
+            }
+
+            if (confirm('هل أنت متأكد من رغبتك في إلغاء تحديد جميع المواد وإعادة ضبط الخطة؟')) {
+                completedBoxes.forEach(box => box.classList.remove('completed'));
+                localStorage.removeItem('fiqhPlanCompletedCourses');
+                graduationCelebrated = false;
+                closeGradModal();
+                updateHours();
+                reorderFreeCourses();
+            }
+        }
+
+        // 5. زر إظهار المواد المتاحة للتسجيل
+        function toggleAvailableCourses() {
+            showAvailableState = !showAvailableState;
+            const btn = document.getElementById('btn-toggle-available');
+            
+            if (showAvailableState) {
+                btn.classList.add('active');
+                btn.textContent = '🔒 إخفاء المتاح';
+                applyAvailableHighlight();
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '🔓 المتاح للتسجيل';
+                document.querySelectorAll('.box').forEach(b => b.classList.remove('is-available-highlight'));
+            }
+        }
+
+        function applyAvailableHighlight() {
+            document.querySelectorAll('.box').forEach(box => {
+                box.classList.remove('is-available-highlight');
+                if (box.classList.contains('completed')) return;
+
+                const prereqId = prerequisitesMap[box.id];
+                if (!prereqId) {
+                    // مادة جذرية أو ليس لها متطلب
+                    box.classList.add('is-available-highlight');
+                } else {
+                    const prereqEl = document.getElementById(prereqId);
+                    if (prereqEl && prereqEl.classList.contains('completed')) {
+                        box.classList.add('is-available-highlight');
+                    }
+                }
+            });
+        }
+
+        // 6. البحث في المواد
+        function searchCourses() {
+            const query = document.getElementById('courseSearchInput').value.trim();
+            const boxes = document.querySelectorAll('.box');
+
+            if (!query) {
+                boxes.forEach(b => b.classList.remove('search-dimmed', 'search-matched'));
+                return;
+            }
+
+            boxes.forEach(b => {
+                const text = b.textContent.replace('✔', '').trim();
+                if (text.includes(query)) {
+                    b.classList.add('search-matched');
+                    b.classList.remove('search-dimmed');
+                } else {
+                    b.classList.remove('search-matched');
+                    b.classList.add('search-dimmed');
+                }
+            });
+        }
+
+        // 7. الوضع الليلي (Dark Mode)
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('fiqhPlanDarkMode', isDark ? 'true' : 'false');
+            document.getElementById('btn-dark-mode').textContent = isDark ? '☀️ النمط النهاري' : '🌙 النمط الليلي';
+        }
+
+        function checkDarkMode() {
+            if (localStorage.getItem('fiqhPlanDarkMode') === 'true') {
+                document.body.classList.add('dark-mode');
+                document.getElementById('btn-dark-mode').textContent = '☀️ النمط النهاري';
+            }
+        }
+
+        // 8. مشاركة عبر واتساب
+        function shareOnWhatsApp() {
+            const currentUrl = window.location.href;
+            const text = `🌿 خطتي الشجرية التفاعلية لتخصص الفقه وأصوله (جامعة عمان العربية):\nأنجزت حتى الآن (${totalHours}) ساعة من أصل 102 ساعة معتمدة.\nتفضل بتجربة الخطة عبر الرابط:\n${currentUrl}`;
+            const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // تحميل صورة
         function downloadImage() {
             const element = document.getElementById('plan-container');
             html2canvas(element, {
                 scale: 2,
-                backgroundColor: '#ffffff',
+                backgroundColor: document.body.classList.contains('dark-mode') ? '#1e293b' : '#ffffff',
                 useCORS: true
             }).then(canvas => {
                 const link = document.createElement('a');
@@ -905,6 +1265,12 @@
                 link.click();
             });
         }
+
+        // التشغيل التلقائي عند التحميل
+        window.addEventListener('DOMContentLoaded', () => {
+            checkDarkMode();
+            loadProgress();
+        });
     </script>
 
 </body>
