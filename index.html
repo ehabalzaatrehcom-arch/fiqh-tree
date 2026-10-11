@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>الخطة الشجرية لتخصص الفقه وأصوله - جامعة عمان العربية</title>
     
-    <!-- إعدادات تطبيق الهاتف PWA والتوافق مع شاشات الهواتف -->
+    <!-- إعدادات تطبيق الهاتف PWA -->
     <meta name="theme-color" content="#0284c7">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -117,15 +117,15 @@
 
         .buttons-group {
             display: flex;
-            gap: 6px;
+            gap: 7px;
             flex-wrap: wrap;
             align-items: center;
         }
 
         .btn {
             border: none;
-            padding: 6px 13px;
-            font-size: 12.5px;
+            padding: 7px 14px;
+            font-size: 13px;
             font-weight: 700;
             border-radius: 20px;
             cursor: pointer;
@@ -144,21 +144,22 @@
         .btn-available { background: #f59e0b; color: #ffffff; }
         .btn-available.active { background: #b45309; }
         .btn-dark { background: #334155; color: #ffffff; }
-        .btn-whatsapp { background: #25d366; color: #ffffff; }
+        .btn-share { background: #25d366; color: #ffffff; }
         .btn-reset { background: #ef4444; color: #ffffff; }
         .btn-download { background: #0284c7; color: #ffffff; }
-        .btn-feature { background: #6366f1; color: #ffffff; }
-        .btn-install { background: #059669; color: #ffffff; display: none; }
+        .btn-report { background: #6366f1; color: #ffffff; }
+        .btn-story { background: linear-gradient(135deg, #ec4899, #8b5cf6); color: #ffffff; }
         .btn-print { background: #ffffff; color: #1e293b; border: 1px solid #cbd5e1; }
         body.dark-mode .btn-print { background: #1e293b; color: #f8fafc; border-color: #475569; }
 
+        /* شريط الإحصائيات الرئيسي */
         .stats-summary-card {
             background: var(--wrapper-bg);
             border: 1.5px solid var(--border-color);
             border-radius: 12px;
             padding: 10px 14px;
             display: flex;
-            justify-content: space-between;
+            justify-content: space-around;
             align-items: center;
             gap: 12px;
             flex-wrap: wrap;
@@ -190,7 +191,7 @@
         .stat-badge-total {
             background: #dcfce7;
             color: #15803d;
-            font-size: 18px;
+            font-size: 17px;
         }
 
         body.dark-mode .stat-badge-total {
@@ -198,27 +199,106 @@
             color: #4ade80;
         }
 
-        .uni-hours-input-wrap {
+        .stat-badge-remaining {
+            background: #fee2e2;
+            color: #dc2626;
+            font-size: 17px;
+        }
+
+        body.dark-mode .stat-badge-remaining {
+            background: #7f1d1d;
+            color: #fca5a5;
+        }
+
+        /* كرت متطلبات الجامعة البارز والواضح جداً */
+        .uni-hours-prominent-card {
+            max-width: 1100px;
+            margin: 0 auto 12px auto;
+            background: #eff6ff;
+            border: 2px solid #3b82f6;
+            border-radius: 14px;
+            padding: 12px 16px;
+            box-shadow: 0 3px 10px rgba(59, 130, 246, 0.12);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        body.dark-mode .uni-hours-prominent-card {
+            background: #172554;
+            border-color: #60a5fa;
+        }
+
+        .uni-card-info {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .uni-card-title {
+            font-size: 14.5px;
+            font-weight: 900;
+            color: #1d4ed8;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        body.dark-mode .uni-card-title {
+            color: #93c5fd;
+        }
+
+        .uni-card-note {
+            font-size: 12.5px;
+            font-weight: 700;
+            color: #334155;
+            line-height: 1.5;
+        }
+
+        body.dark-mode .uni-card-note {
+            color: #cbd5e1;
+        }
+
+        .uni-card-input-box {
             display: flex;
             align-items: center;
             gap: 8px;
-            background: var(--section-bg);
-            border: 1.5px solid var(--border-color);
-            padding: 4px 10px;
-            border-radius: 10px;
+            background: #ffffff;
+            border: 2px solid #2563eb;
+            padding: 6px 14px;
+            border-radius: 12px;
+            box-shadow: 0 2px 6px rgba(37, 99, 235, 0.15);
+        }
+
+        body.dark-mode .uni-card-input-box {
+            background: #1e293b;
+            border-color: #60a5fa;
         }
 
         .uni-hours-input {
-            width: 55px;
-            padding: 4px 6px;
-            font-size: 14px;
+            width: 65px;
+            padding: 5px 8px;
+            font-size: 18px;
             font-weight: 900;
-            border-radius: 6px;
-            border: 1.5px solid #0284c7;
+            border-radius: 8px;
+            border: 2px solid #2563eb;
             text-align: center;
-            background: var(--wrapper-bg);
-            color: var(--text-main);
+            background: #f8fafc;
+            color: #1d4ed8;
             outline: none;
+            transition: all 0.2s;
+        }
+
+        body.dark-mode .uni-hours-input {
+            background: #0f172a;
+            color: #93c5fd;
+            border-color: #60a5fa;
+        }
+
+        .uni-hours-input:focus {
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
         }
 
         .controls-sub-row {
@@ -369,11 +449,6 @@
 
         .box.search-matched { outline: 2.5px solid #0284c7; transform: scale(1.02); z-index: 10; }
 
-        .box.planned-next-semester {
-            outline: 2.5px dashed #f59e0b !important;
-            transform: scale(1.02);
-        }
-
         .check-box {
             width: 16px;
             height: 16px;
@@ -461,20 +536,108 @@
         .modal-box {
             background: var(--wrapper-bg); color: var(--text-main);
             border: 2px solid var(--border-color); border-radius: 18px;
-            max-width: 500px; width: 92%; padding: 22px;
+            max-width: 480px; width: 92%; padding: 22px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.25);
             max-height: 90vh; overflow-y: auto; text-align: right;
         }
 
         .modal-title { font-size: 20px; font-weight: 900; margin-bottom: 12px; color: #0284c7; text-align: center; }
         .modal-btn-close {
-            background: #ef4444; color: #ffffff; border: none; font-size: 14px; font-weight: 800;
+            background: #ef4444; color: #ffffff; border: none; font-size: 13.5px; font-weight: 800;
             padding: 8px 22px; border-radius: 20px; cursor: pointer; display: block; margin: 16px auto 0 auto;
+        }
+
+        /* كرت الستوري */
+        .story-container {
+            width: 320px;
+            height: 568px;
+            background: linear-gradient(145deg, #0f172a, #1e293b);
+            border-radius: 24px;
+            padding: 28px 20px;
+            margin: 0 auto;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #38bdf8;
+        }
+
+        .story-badge-uni {
+            font-size: 13px;
+            font-weight: 800;
+            color: #38bdf8;
+            letter-spacing: 0.5px;
+        }
+
+        .story-title {
+            font-size: 21px;
+            font-weight: 900;
+            color: #ffffff;
+            margin-top: 6px;
+        }
+
+        .story-circle-wrapper {
+            width: 170px;
+            height: 170px;
+            margin: 16px auto;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(2, 132, 199, 0.2) 0%, rgba(15, 23, 42, 0.8) 70%);
+            border: 4px solid #10b981;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 25px rgba(16, 185, 129, 0.35);
+        }
+
+        .story-circle-percent {
+            font-size: 42px;
+            font-weight: 900;
+            color: #ffffff;
+            line-height: 1;
+        }
+
+        .story-circle-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: #94a3b8;
+            margin-top: 4px;
+        }
+
+        .story-details-box {
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 14px;
+            padding: 12px;
+            display: flex;
+            justify-content: space-around;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .story-stat-number {
+            font-size: 20px;
+            font-weight: 900;
+            color: #38bdf8;
+        }
+
+        .story-stat-title {
+            font-size: 11px;
+            color: #94a3b8;
+            font-weight: 700;
+        }
+
+        .story-footer-text {
+            font-size: 11.5px;
+            color: #64748b;
+            font-weight: 700;
         }
 
         @media print {
             body { background: #ffffff !important; color: #000000 !important; }
-            .toolbar, .modal-overlay { display: none !important; }
+            .toolbar, .uni-hours-prominent-card, .modal-overlay { display: none !important; }
             .wrapper { border: none !important; box-shadow: none !important; width: 100% !important; }
         }
 
@@ -488,79 +651,61 @@
             .grid-main-fiqh, .grid-5, .grid-free { grid-template-columns: 1fr; gap: 8px; }
             .grid-osool-subs { grid-template-columns: 1fr; gap: 6px; }
             .stats-summary-card { flex-direction: column; align-items: stretch; }
+            .uni-hours-prominent-card { flex-direction: column; align-items: stretch; text-align: center; }
+            .uni-card-input-box { justify-content: center; }
         }
     </style>
 </head>
 <body>
 
-    <!-- تشغيل الوضع الليلي وتجهيز ملف تطبيق الهاتف PWA -->
     <script>
         if (localStorage.getItem('fiqhPlanDarkMode') === 'true') {
             document.body.classList.add('dark-mode');
         }
-
-        // إنشاء كود تعريف التطبيق للهاتف (PWA Web App Manifest) تلقائياً
-        const manifestObj = {
-            name: "الخطة الشجرية لتخصص الفقه وأصوله",
-            short_name: "خطة الفقه",
-            start_url: window.location.href,
-            display: "standalone",
-            background_color: "#0284c7",
-            theme_color: "#0284c7",
-            icons: [{
-                src: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230284c7'/><text x='50%' y='68%' font-size='60' text-anchor='middle'>🌿</text></svg>",
-                sizes: "192x192 512x512",
-                type: "image/svg+xml"
-            }]
-        };
-        const manifestBlob = new Blob([JSON.stringify(manifestObj)], { type: 'application/manifest+json' });
-        const manifestURL = URL.createObjectURL(manifestBlob);
-        const linkElem = document.createElement('link');
-        linkElem.rel = 'manifest';
-        linkElem.href = manifestURL;
-        document.head.appendChild(linkElem);
     </script>
 
     <!-- شريط الأدوات والتحكم الشامل -->
     <div class="toolbar">
         <div class="toolbar-top-row">
+            <!-- كرت الإحصائيات الشاملة والواضحة -->
             <div class="stats-summary-card" style="width: 100%;">
                 <div class="stat-item">
-                    <span>ساعات التخصص:</span>
+                    <span>ساعات التخصص المنجزة:</span>
                     <span class="stat-badge" id="passed-major-hours">0</span>
                     <span style="font-size: 12px; color: #64748b;">من 102</span>
                 </div>
 
-                <div class="uni-hours-input-wrap">
-                    <span style="font-size: 12.5px; font-weight: 800;">متطلبات الجامعة المنجزة:</span>
-                    <input type="number" id="uni-hours-input" class="uni-hours-input" min="0" max="30" value="0" oninput="handleUniHoursChange(this)">
-                    <span style="font-size: 12px; font-weight: 700; color: #64748b;">من 30 ساعة</span>
+                <div class="stat-item">
+                    <span>متطلبات الجامعة المنجزة:</span>
+                    <span class="stat-badge" id="passed-uni-badge" style="background:#fef3c7; color:#b45309;">0</span>
+                    <span style="font-size: 12px; color: #64748b;">من 30</span>
                 </div>
 
                 <div class="stat-item">
                     <span>المجموع الكلي المنجز:</span>
                     <span class="stat-badge stat-badge-total" id="passed-total-hours">0</span>
-                    <span style="font-size: 13px; font-weight: 900; color: #0284c7;">/ 132 ساعة</span>
+                    <span style="font-size: 12px; color: #15803d;">/ 132</span>
+                </div>
+
+                <div class="stat-item">
+                    <span>الساعات المتبقية للتخرج:</span>
+                    <span class="stat-badge stat-badge-remaining" id="remaining-hours-badge">132</span>
+                    <span style="font-size: 12px; color: #dc2626;">ساعة</span>
                 </div>
             </div>
         </div>
 
-        <!-- أزرار الميزات المتقدمة وتثبيت التطبيق -->
+        <!-- أزرار الإجراءات -->
         <div class="toolbar-top-row" style="margin-top: 4px;">
             <div class="buttons-group">
-                <button class="btn btn-install" id="btn-install-app" onclick="installAppDirectly()">📲 تثبيت كتطبيق</button>
                 <button class="btn btn-available" id="btn-toggle-available" onclick="toggleAvailableCourses()">🔓 المتاح للتسجيل</button>
-                <button class="btn btn-feature" onclick="openSemesterPlannerModal()">🗓️ مخطط فصلي</button>
-                <button class="btn btn-feature" onclick="openGradCalcModal()">⏳ حاسبة التخرج</button>
-                <button class="btn btn-feature" onclick="openGpaModal()">📊 حاسبة المعدل</button>
-                <button class="btn btn-feature" onclick="exportDataToFile()">💾 حفظ نسخة (Export)</button>
-                <button class="btn btn-feature" onclick="document.getElementById('importFileInput').click()">📂 استرجاع (Import)</button>
-                <input type="file" id="importFileInput" style="display:none" accept=".json" onchange="importDataFromFile(event)">
-                <button class="btn btn-feature" onclick="printOfficialReport()">📄 تقرير رسمي</button>
+                <button class="btn btn-story" onclick="openStoryModal()">📸 بطاقة إنجازي (ستوري)</button>
+                <button class="btn btn-report" onclick="printPassedCoursesReport()">📄 تقرير بالمواد المجتازة</button>
+                <button class="btn btn-print" onclick="window.print()">🖨️ طباعة الخطة</button>
                 <button class="btn btn-dark" id="btn-dark-mode" onclick="toggleDarkMode()">🌙 النمط الليلي</button>
-                <button class="btn btn-whatsapp" onclick="shareOnWhatsApp()">📲 واتساب</button>
+                <button class="btn btn-share" onclick="openShareModal()">📲 مشاركة</button>
                 <button class="btn btn-reset" onclick="resetAllCourses()">🔄 مسح التحديد</button>
-                <button class="btn btn-download" onclick="downloadImage()">📥 تحميل (PNG)</button>
+                <button class="btn btn-download" onclick="downloadImage()">📥 تحميل الخطة (PNG)</button>
             </div>
         </div>
 
@@ -578,6 +723,23 @@
             <div class="search-box-wrap">
                 <input type="text" class="search-input" id="courseSearchInput" placeholder="🔍 ابحث عن اسم أي مادة..." oninput="searchCourses()">
             </div>
+        </div>
+    </div>
+
+    <!-- كرت إدخال متطلبات الجامعة البارز والواضح جداً مع ملاحظة صريحة للطالب -->
+    <div class="uni-hours-prominent-card">
+        <div class="uni-card-info">
+            <div class="uni-card-title">
+                🏛️ ساعات متطلبات الجامعة المنجزة (30 ساعة إجمالاً)
+            </div>
+            <div class="uni-card-note">
+                ✍️ <strong>ملاحظة للطالب:</strong> يُرجى كتابة عدد الساعات التي اجتزتها من متطلبات الجامعة هنا يدوياً (سواء الإجبارية أو الاختيارية بحد أقصى 30 ساعة) ليتم احتسابها تلقائياً مع ساعات الشجرة وإكمال الـ 132 ساعة.
+            </div>
+        </div>
+        <div class="uni-card-input-box">
+            <span style="font-size: 13.5px; font-weight: 800; color: #1e293b;">أدخل ساعاتك هنا:</span>
+            <input type="number" id="uni-hours-input" class="uni-hours-input" min="0" max="30" value="0" oninput="handleUniHoursChange(this)">
+            <span style="font-size: 13px; font-weight: 800; color: #64748b;">/ 30 ساعة</span>
         </div>
     </div>
 
@@ -820,73 +982,63 @@
         </div>
     </div>
 
-    <!-- نافذة 1: حاسبة التخرج والفصول المتبقية -->
-    <div class="modal-overlay" id="gradCalcModal">
-        <div class="modal-box">
-            <div class="modal-title">⏳ حاسبة التخرج والفصول المتبقية</div>
-            <p style="font-size: 13.5px; line-height: 1.6; margin-bottom: 12px;">
-                عدد الساعات الإجمالي المتبقي لك للتخرج هو: <strong id="calc-remaining-hours" style="color: #0284c7; font-size: 16px;">132</strong> ساعة.
-            </p>
-            <div style="margin-bottom: 14px;">
-                <label style="font-size: 13px; font-weight: 800; display: block; margin-bottom: 6px;">كم ساعة تنوي تسجيلها في كل فصل قادم؟</label>
-                <select id="hours-per-semester-select" style="width: 100%; padding: 8px; border-radius: 8px; font-weight: 700; border: 1.5px solid var(--border-color); background: var(--section-bg); color: var(--text-main);" onchange="updateGraduationEstimate()">
-                    <option value="12">12 ساعة (الحد الأدنى)</option>
-                    <option value="15" selected>15 ساعة (المعدل الطبيعي)</option>
-                    <option value="18">18 ساعة (الحد الأقصى)</option>
-                    <option value="9">9 ساعات (فصل صيفي)</option>
-                </select>
-            </div>
-            <div id="grad-estimate-result" style="background: var(--section-bg); padding: 12px; border-radius: 10px; border: 1.5px solid var(--border-color); font-size: 13.5px; font-weight: 800; line-height: 1.7;">
-            </div>
-            <button class="modal-btn-close" onclick="closeModal('gradCalcModal')">إغلاق النافذة</button>
-        </div>
-    </div>
+    <!-- نافذة 1: بطاقة الستوري لمشاركتها كصورة -->
+    <div class="modal-overlay" id="storyModal">
+        <div class="modal-box" style="text-align: center; max-width: 380px;">
+            <div class="modal-title">📸 بطاقة إنجازي (ستوري)</div>
+            <p style="font-size: 12.5px; color: #64748b; margin-bottom: 12px;">بطاقة مخصصة بدقة عالية لمشاركتها على حالات واتساب وإنستغرام</p>
+            
+            <div id="storyCardCapture" class="story-container">
+                <div>
+                    <div class="story-badge-uni">جامعة عمان العربية • كلية الشريعة</div>
+                    <div class="story-title">خطة الفقه وأصوله</div>
+                </div>
 
-    <!-- نافذة 2: حاسبة المعدل التراكمي والفصلي -->
-    <div class="modal-overlay" id="gpaModal">
-        <div class="modal-box">
-            <div class="modal-title">📊 حاسبة المعدل الجامعي</div>
-            <div style="display: flex; flex-direction: column; gap: 10px; font-size: 13px; font-weight: 700;">
-                <div>
-                    <label>المعدل التراكمي السابق (من 4.0):</label>
-                    <input type="number" id="prev-gpa" step="0.01" min="0" max="4" value="2.5" style="width: 100%; padding: 7px; border-radius: 8px; border: 1.5px solid var(--border-color); background: var(--section-bg); color: var(--text-main); font-weight: 800;">
+                <div class="story-circle-wrapper">
+                    <div class="story-circle-percent" id="storyPercent">0%</div>
+                    <div class="story-circle-label">نسبة الإنجاز</div>
                 </div>
+
                 <div>
-                    <label>عدد الساعات التراكمية السابقة المحسوبة:</label>
-                    <input type="number" id="prev-hours-gpa" min="0" max="132" value="30" style="width: 100%; padding: 7px; border-radius: 8px; border: 1.5px solid var(--border-color); background: var(--section-bg); color: var(--text-main); font-weight: 800;">
-                </div>
-                <div>
-                    <label>ساعات الفصل الحالي وعلاماته المتوقعة (المعدل الفصلي من 4.0):</label>
-                    <div style="display: flex; gap: 8px; margin-top: 4px;">
-                        <input type="number" id="sem-hours-gpa" value="15" placeholder="ساعات الفصل" style="flex: 1; padding: 7px; border-radius: 8px; border: 1.5px solid var(--border-color); background: var(--section-bg); color: var(--text-main); font-weight: 800;">
-                        <input type="number" id="sem-gpa-val" step="0.01" value="3.0" placeholder="المعدل المتوقع" style="flex: 1; padding: 7px; border-radius: 8px; border: 1.5px solid var(--border-color); background: var(--section-bg); color: var(--text-main); font-weight: 800;">
+                    <div class="story-details-box">
+                        <div>
+                            <div class="story-stat-number" id="storyPassedHours">0</div>
+                            <div class="story-stat-title">ساعات منجزة</div>
+                        </div>
+                        <div style="width: 1px; background: rgba(255,255,255,0.15);"></div>
+                        <div>
+                            <div class="story-stat-number" id="storyRemainingHours">132</div>
+                            <div class="story-stat-title">ساعات متبقية</div>
+                        </div>
                     </div>
                 </div>
-                <button class="btn btn-download" style="justify-content: center; width: 100%; padding: 8px;" onclick="calculateGPA()">احسب المعدل الجديد</button>
-                <div id="gpa-result-box" style="display:none; background: var(--section-bg); padding: 10px; border-radius: 8px; text-align: center; font-weight: 900; font-size: 15px; border: 1.5px solid #0284c7;"></div>
+
+                <div class="story-footer-text">
+                    إنجاز أكاديمي مستمر 🌿 • خطة الفقه التفاعلية
+                </div>
             </div>
-            <button class="modal-btn-close" onclick="closeModal('gpaModal')">إغلاق</button>
+
+            <button class="btn btn-download" style="margin: 16px auto 0 auto; width: 100%; justify-content: center; padding: 9px;" onclick="downloadStoryImage()">📥 تحميل بطاقة الستوري كصورة</button>
+            <button class="modal-btn-close" onclick="closeModal('storyModal')">إغلاق</button>
         </div>
     </div>
 
-    <!-- نافذة 3: مخطط الفصل القادم -->
-    <div class="modal-overlay" id="semesterPlannerModal">
-        <div class="modal-box">
-            <div class="modal-title">🗓️ مخطط الفصل القادم</div>
-            <p style="font-size: 13px; font-weight: 700; line-height: 1.6; margin-bottom: 12px;">
-                قم بالنقر على زر <strong>"تفعيل اختيار مواد الفصل"</strong> ثم انقر على المواد من الشجرة لاختيارها للفصل القادم وحساب مجموع ساعاتها دون اعتبارها مجتازة:
+    <!-- نافذة 2: نافذة المشاركة -->
+    <div class="modal-overlay" id="shareModal">
+        <div class="modal-box" style="text-align: center;">
+            <div class="modal-title">📲 مشاركة الخطة مع زملائك</div>
+            <p style="font-size: 13.5px; font-weight: 700; line-height: 1.6; margin-bottom: 16px;">
+                شارك رابط الخطة التفاعلية مع زملائك في كلية الشريعة وقروبات الدفعة للاستفادة منها:
             </p>
-            <div style="text-align: center; margin-bottom: 12px;">
-                <button class="btn btn-available" id="btn-toggle-planning" onclick="togglePlanningMode()">بدء اختيار مواد الفصل</button>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <button class="btn btn-share" style="justify-content: center; padding: 10px; font-size: 14px;" onclick="shareDirectWhatsApp()">💬 مشاركة عبر واتساب</button>
+                <button class="btn btn-download" style="justify-content: center; padding: 10px; font-size: 14px;" onclick="copyPlanLink()">📋 نسخ رابط الخطة</button>
             </div>
-            <div id="planner-status-box" style="background: var(--section-bg); padding: 10px; border-radius: 8px; font-size: 13px; font-weight: 800; border: 1.5px solid var(--border-color); line-height: 1.7;">
-                ساعات الفصل المختارة حتى الآن: <span id="planned-hours-sum" style="color: #0284c7; font-size: 17px;">0</span> ساعة.
-            </div>
-            <button class="modal-btn-close" onclick="closeModal('semesterPlannerModal')">إغلاق</button>
+            <button class="modal-btn-close" onclick="closeModal('shareModal')">إغلاق</button>
         </div>
     </div>
 
-    <!-- نافذة تهنئة التخرج -->
+    <!-- نافذة 3: تهنئة التخرج -->
     <div class="modal-overlay" id="gradModal">
         <div class="modal-box" style="text-align: center; border-color: #10b981;">
             <div style="font-size: 55px;">🎓</div>
@@ -905,8 +1057,6 @@
         let totalHours = 0;
         let graduationCelebrated = false;
         let showAvailableState = false;
-        let isPlanningMode = false;
-        let deferredPrompt = null;
 
         const prerequisitesMap = {
             'box-osool-1': 'box-madkhal-fiqh',
@@ -929,28 +1079,6 @@
             'box-firaq': 'box-madkhal-aqeedah',
             'box-qiraat-aqeedah': 'box-madkhal-aqeedah'
         };
-
-        // دعم تثبيت التطبيق على الهواتف
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            const installBtn = document.getElementById('btn-install-app');
-            if (installBtn) installBtn.style.display = 'inline-flex';
-        });
-
-        function installAppDirectly() {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                deferredPrompt.userChoice.then((choiceResult) => {
-                    if (choiceResult.outcome === 'accepted') {
-                        document.getElementById('btn-install-app').style.display = 'none';
-                    }
-                    deferredPrompt = null;
-                });
-            } else {
-                alert('لتثبيت الموقع كتطبيق على هاتفك:\n- على آيفون: اضغط زر المشاركة (Share) ثم اختر "إضافة إلى الشاشة الرئيسية (Add to Home Screen)".\n- على أندرويد: اضغط الثلاث نقاط أعلى المتصفح ثم اختر "تثبيت التطبيق (Install app)".');
-            }
-        }
 
         function handleUniHoursChange(input) {
             let val = parseInt(input.value) || 0;
@@ -1004,15 +1132,18 @@
             majorHours = Math.min(102, majorHours);
             document.getElementById('passed-major-hours').textContent = majorHours;
 
+            // تحديث بادج متطلبات الجامعة في العداد
+            document.getElementById('passed-uni-badge').textContent = uniHours;
+
             totalHours = Math.min(132, majorHours + uniHours);
             document.getElementById('passed-total-hours').textContent = totalHours;
+
+            const remaining = Math.max(0, 132 - totalHours);
+            document.getElementById('remaining-hours-badge').textContent = remaining;
 
             const percentage = Math.min(100, Math.round((totalHours / 132) * 100));
             document.getElementById('progress-percentage-text').textContent = percentage + '%';
             document.getElementById('progress-bar').style.width = percentage + '%';
-
-            document.getElementById('calc-remaining-hours').textContent = (132 - totalHours);
-            updateGraduationEstimate();
 
             if (totalHours >= 132 && !graduationCelebrated) {
                 graduationCelebrated = true;
@@ -1050,16 +1181,6 @@
 
         function toggleCourse(courseId, prereqId, prereqName, isElective) {
             const courseEl = document.getElementById(courseId);
-
-            if (isPlanningMode) {
-                if (courseEl.classList.contains('completed')) {
-                    alert('هذه المادة منجزة بالفعل!');
-                    return;
-                }
-                courseEl.classList.toggle('planned-next-semester');
-                updatePlannedSemesterHours();
-                return;
-            }
 
             if (courseEl.classList.contains('completed')) {
                 courseEl.classList.remove('completed');
@@ -1181,151 +1302,164 @@
             if (btn) btn.textContent = isDark ? '☀️ النمط النهاري' : '🌙 النمط الليلي';
         }
 
-        function openGradCalcModal() {
-            document.getElementById('gradCalcModal').style.display = 'flex';
-            updateGraduationEstimate();
+        function openStoryModal() {
+            const percent = Math.min(100, Math.round((totalHours / 132) * 100));
+            const remaining = Math.max(0, 132 - totalHours);
+            document.getElementById('storyPercent').textContent = percent + '%';
+            document.getElementById('storyPassedHours').textContent = totalHours;
+            document.getElementById('storyRemainingHours').textContent = remaining;
+            document.getElementById('storyModal').style.display = 'flex';
         }
 
-        function updateGraduationEstimate() {
-            const remaining = 132 - totalHours;
-            const pace = parseInt(document.getElementById('hours-per-semester-select').value) || 15;
-            const semestersLeft = Math.ceil(remaining / pace);
-            const resBox = document.getElementById('grad-estimate-result');
-            resBox.innerHTML = `
-                🎓 الساعات المتبقية لك: <strong>${remaining}</strong> ساعة.<br>
-                📅 إذا سجلت بمعدل <strong>${pace}</strong> ساعة/فصل، يتبقى لك: <strong>${semestersLeft} فصول دراسية</strong> لتتخرج بحمد الله!
-            `;
-        }
-
-        function openGpaModal() {
-            document.getElementById('gpaModal').style.display = 'flex';
-        }
-
-        function calculateGPA() {
-            const prevGpa = parseFloat(document.getElementById('prev-gpa').value) || 0;
-            const prevHours = parseFloat(document.getElementById('prev-hours-gpa').value) || 0;
-            const semHours = parseFloat(document.getElementById('sem-hours-gpa').value) || 0;
-            const semGpa = parseFloat(document.getElementById('sem-gpa-val').value) || 0;
-
-            const totalQualityPoints = (prevGpa * prevHours) + (semGpa * semHours);
-            const totalH = prevHours + semHours;
-            if (totalH === 0) return;
-
-            const newCumulative = (totalQualityPoints / totalH).toFixed(2);
-            const res = document.getElementById('gpa-result-box');
-            res.style.display = 'block';
-            res.innerHTML = `معدلك التراكمي الجديد المتوقع: <span style="color:#10b981;">${newCumulative}</span> من 4.0`;
-        }
-
-        function openSemesterPlannerModal() {
-            document.getElementById('semesterPlannerModal').style.display = 'flex';
-        }
-
-        function togglePlanningMode() {
-            isPlanningMode = !isPlanningMode;
-            const btn = document.getElementById('btn-toggle-planning');
-            if (isPlanningMode) {
-                btn.textContent = 'إيقاف وضع التخطيط';
-                btn.style.background = '#ef4444';
-                closeModal('semesterPlannerModal');
-                alert('تم تفعيل وضع التخطيط! انقر الآن على المواد التي تنوي تسجيلها من الشجرة لحساب ساعاتها.');
-            } else {
-                btn.textContent = 'بدء اختيار مواد الفصل';
-                btn.style.background = '#f59e0b';
-                document.querySelectorAll('.box.planned-next-semester').forEach(b => b.classList.remove('planned-next-semester'));
-                updatePlannedSemesterHours();
-            }
-        }
-
-        function updatePlannedSemesterHours() {
-            let plannedHours = 0;
-            document.querySelectorAll('.box.planned-next-semester').forEach(b => {
-                plannedHours += parseInt(b.getAttribute('data-hours') || '3');
+        function downloadStoryImage() {
+            const element = document.getElementById('storyCardCapture');
+            html2canvas(element, {
+                scale: 3,
+                useCORS: true,
+                backgroundColor: null
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = `ستوري_إنجاز_الفقه_${totalHours}_ساعة.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
             });
-            document.getElementById('planned-hours-sum').textContent = plannedHours;
         }
 
-        function exportDataToFile() {
-            const completedIds = [];
-            document.querySelectorAll('.box.completed').forEach(b => completedIds.push(b.id));
-            const backupData = {
-                completedCourses: completedIds,
-                uniHours: uniHours,
-                date: new Date().toLocaleDateString('ar-JO')
-            };
-            const blob = new Blob([JSON.stringify(backupData, null, 2)], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `خطة_الفقه_نسخة_احتياطية_${totalHours}_ساعة.json`;
-            a.click();
-            URL.revokeObjectURL(url);
-        }
-
-        function importDataFromFile(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                try {
-                    const data = JSON.parse(e.target.result);
-                    if (data.completedCourses && Array.isArray(data.completedCourses)) {
-                        document.querySelectorAll('.box.completed').forEach(b => b.classList.remove('completed'));
-                        data.completedCourses.forEach(id => {
-                            const el = document.getElementById(id);
-                            if (el) el.classList.add('completed');
-                        });
-                        if (typeof data.uniHours !== 'undefined') {
-                            uniHours = Math.min(30, Math.max(0, parseInt(data.uniHours) || 0));
-                            document.getElementById('uni-hours-input').value = uniHours;
-                            localStorage.setItem('fiqhPlanUniHours', uniHours);
-                        }
-                        saveProgress();
-                        updateHours();
-                        reorderFreeCourses();
-                        alert('✅ تم استرجاع نسختك الاحتياطية بنجاح!');
-                    }
-                } catch(err) {
-                    alert('⚠️ عذراً، الملف غير صالح.');
-                }
-            };
-            reader.readAsText(file);
-        }
-
-        function printOfficialReport() {
+        function printPassedCoursesReport() {
             const passedCourses = [];
             document.querySelectorAll('.box.completed').forEach(b => {
-                passedCourses.push(b.querySelector('.box-title-text').textContent.trim());
+                passedCourses.push({
+                    title: b.querySelector('.box-title-text').textContent.trim(),
+                    hours: b.getAttribute('data-hours') || '3'
+                });
             });
 
             const printWindow = window.open('', '_blank');
             printWindow.document.write(`
                 <html dir="rtl" lang="ar">
                 <head>
-                    <title>كشف الإنجاز الأكاديمي - تخصص الفقه وأصوله</title>
+                    <title>تقرير بالمواد المجتازة - تخصص الفقه وأصوله</title>
+                    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700;800;900&display=swap" rel="stylesheet">
                     <style>
-                        body { font-family: 'Tajawal', Tahoma, sans-serif; padding: 25px; direction: rtl; }
-                        h2, h3 { text-align: center; color: #0f172a; margin-bottom: 6px; }
-                        .report-header { border-bottom: 2px solid #0284c7; padding-bottom: 12px; margin-bottom: 20px; }
-                        .stat-box { background: #f1f5f9; padding: 12px; border-radius: 8px; margin-bottom: 15px; font-weight: bold; }
-                        ol { padding-right: 25px; line-height: 1.8; font-size: 14px; }
+                        body { 
+                            font-family: 'Tajawal', Tahoma, sans-serif !important; 
+                            padding: 30px; 
+                            direction: rtl; 
+                            background: #ffffff;
+                            color: #0f172a;
+                        }
+                        .header-wrap {
+                            border-bottom: 2.5px solid #0284c7;
+                            padding-bottom: 16px;
+                            margin-bottom: 24px;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                        }
+                        .header-title h2 { margin: 0; font-size: 24px; font-weight: 900; color: #0f172a; }
+                        .header-title p { margin: 4px 0 0 0; font-size: 14px; font-weight: 700; color: #0284c7; }
+                        .summary-grid {
+                            display: grid;
+                            grid-template-columns: repeat(3, 1fr);
+                            gap: 12px;
+                            margin-bottom: 24px;
+                        }
+                        .summary-box {
+                            background: #f8fafc;
+                            border: 1.5px solid #e2e8f0;
+                            border-radius: 10px;
+                            padding: 12px;
+                            text-align: center;
+                        }
+                        .summary-box .num { font-size: 22px; font-weight: 900; color: #0284c7; }
+                        .summary-box .lbl { font-size: 12px; font-weight: 700; color: #64748b; margin-top: 3px; }
+                        table {
+                            width: 100%;
+                            border-collapse: collapse;
+                            margin-top: 10px;
+                            font-size: 13.5px;
+                        }
+                        th {
+                            background: #f1f5f9;
+                            color: #1e293b;
+                            font-weight: 800;
+                            padding: 10px 12px;
+                            border-bottom: 2px solid #cbd5e1;
+                            text-align: right;
+                        }
+                        td {
+                            padding: 9px 12px;
+                            border-bottom: 1px solid #e2e8f0;
+                            font-weight: 700;
+                        }
+                        tr:nth-child(even) td { background: #f8fafc; }
+                        .footer-note {
+                            margin-top: 30px;
+                            padding-top: 12px;
+                            border-top: 1px dashed #cbd5e1;
+                            font-size: 12px;
+                            color: #64748b;
+                            text-align: center;
+                        }
                     </style>
                 </head>
                 <body>
-                    <div class="report-header">
-                        <h2>جامعة عمان العربية — كلية الشريعة</h2>
-                        <h3>كشف المتابعة الأكاديمية لمواد تخصص الفقه وأصوله</h3>
-                        <p style="text-align:center; font-size: 13px; color: #64748b;">تاريخ التقرير: ${new Date().toLocaleDateString('ar-JO')}</p>
+                    <div class="header-wrap">
+                        <div class="header-title">
+                            <h2>جامعة عمان العربية — كلية الشريعة</h2>
+                            <p>تقرير رسمي بالمواد المجتازة — تخصص الفقه وأصوله (132 ساعة)</p>
+                        </div>
+                        <div style="font-size: 12px; font-weight: 700; color: #64748b; text-align: left;">
+                            تاريخ الإصدار:<br>
+                            ${new Date().toLocaleDateString('ar-JO')}
+                        </div>
                     </div>
-                    <div class="stat-box">
-                        📌 الساعات المنجزة من مواد التخصص: ${majorHours} من 102 ساعة<br>
-                        📌 متطلبات الجامعة المحسوبة: ${uniHours} من 30 ساعة<br>
-                        🎯 المجموع التراكمي المنجز: ${totalHours} من أصل 132 ساعة معتمدة (${Math.round((totalHours/132)*100)}%)
+
+                    <div class="summary-grid">
+                        <div class="summary-box">
+                            <div class="num">${majorHours} / 102</div>
+                            <div class="lbl">ساعات التخصص المنجزة</div>
+                        </div>
+                        <div class="summary-box">
+                            <div class="num">${uniHours} / 30</div>
+                            <div class="lbl">متطلبات الجامعة</div>
+                        </div>
+                        <div class="summary-box">
+                            <div class="num" style="color: #15803d;">${totalHours} / 132 (${Math.round((totalHours/132)*100)}%)</div>
+                            <div class="lbl">المجموع الكلي التراكمي</div>
+                        </div>
                     </div>
-                    <h3>المساقات المجتازة بنجاح (${passedCourses.length} مادة):</h3>
-                    <ol>
-                        ${passedCourses.map(c => `<li>${c}</li>`).join('')}
-                    </ol>
+
+                    <h3 style="font-size: 16px; font-weight: 900; margin-bottom: 10px; color: #1e293b;">
+                        المساقات المنجزة بنجاح (${passedCourses.length} مادة):
+                    </h3>
+
+                    ${passedCourses.length === 0 ? '<p style="font-weight:700; color:#ef4444;">لم يتم تحديد أي مادة منجزة بعد.</p>' : `
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 50px;">#</th>
+                                <th>اسم المادة</th>
+                                <th style="width: 110px; text-align: center;">الساعات المعتمدة</th>
+                                <th style="width: 90px; text-align: center;">الحالة</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${passedCourses.map((c, i) => `
+                                <tr>
+                                    <td>${i + 1}</td>
+                                    <td>${c.title}</td>
+                                    <td style="text-align: center;">${c.hours} ساعات</td>
+                                    <td style="text-align: center; color: #15803d;">مكتمل ✔</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                    `}
+
+                    <div class="footer-note">
+                        تم استخراج هذا التقرير عبر موقع الخطة الشجرية التفاعلية لتخصص الفقه وأصوله 🌿
+                    </div>
                 </body>
                 </html>
             `);
@@ -1334,10 +1468,21 @@
             setTimeout(() => { printWindow.print(); }, 500);
         }
 
-        function shareOnWhatsApp() {
+        function openShareModal() {
+            document.getElementById('shareModal').style.display = 'flex';
+        }
+
+        function shareDirectWhatsApp() {
             const currentUrl = window.location.href;
-            const text = `🌿 خطتي الشجرية لتخصص الفقه وأصوله (جامعة عمان العربية):\nأنجزت حتى الآن (${totalHours}) ساعة من أصل 132 ساعة معتمدة.\nيمكنك تجربة الخطة ومتابعة إنجازك عبر الرابط:\n${currentUrl}`;
+            const text = `🌿 الخطة الشجرية التفاعلية لتخصص الفقه وأصوله (جامعة عمان العربية):\nأنجزت حتى الآن (${totalHours}) ساعة من أصل 132 ساعة معتمدة.\nيمكنك متابعة خطتك وحساب ساعاتك بسهولة عبر الرابط:\n${currentUrl}`;
             window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
+        }
+
+        function copyPlanLink() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                alert('✅ تم نسخ رابط الخطة بنجاح!');
+                closeModal('shareModal');
+            });
         }
 
         function downloadImage() {
