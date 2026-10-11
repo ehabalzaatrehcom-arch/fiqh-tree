@@ -141,6 +141,7 @@
             filter: brightness(0.95);
         }
 
+        .btn-install { background: #059669; color: #ffffff; }
         .btn-available { background: #f59e0b; color: #ffffff; }
         .btn-available.active { background: #b45309; }
         .btn-dark { background: #334155; color: #ffffff; }
@@ -662,6 +663,27 @@
         if (localStorage.getItem('fiqhPlanDarkMode') === 'true') {
             document.body.classList.add('dark-mode');
         }
+
+        // إعداد ملف تعريف التطبيق PWA
+        const manifestObj = {
+            name: "الخطة الشجرية لتخصص الفقه وأصوله",
+            short_name: "خطة الفقه",
+            start_url: window.location.href,
+            display: "standalone",
+            background_color: "#0284c7",
+            theme_color: "#0284c7",
+            icons: [{
+                src: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230284c7'/><text x='50%' y='68%' font-size='60' text-anchor='middle'>🌿</text></svg>",
+                sizes: "192x192 512x512",
+                type: "image/svg+xml"
+            }]
+        };
+        const manifestBlob = new Blob([JSON.stringify(manifestObj)], { type: 'application/manifest+json' });
+        const manifestURL = URL.createObjectURL(manifestBlob);
+        const linkElem = document.createElement('link');
+        linkElem.rel = 'manifest';
+        linkElem.href = manifestURL;
+        document.head.appendChild(linkElem);
     </script>
 
     <!-- شريط الأدوات والتحكم الشامل -->
@@ -695,9 +717,10 @@
             </div>
         </div>
 
-        <!-- أزرار الإجراءات -->
+        <!-- أزرار الإجراءات مع زر تثبيت كتطبيق متاح دائماً -->
         <div class="toolbar-top-row" style="margin-top: 4px;">
             <div class="buttons-group">
+                <button class="btn btn-install" onclick="installAppDirectly()">📲 تثبيت كتطبيق</button>
                 <button class="btn btn-available" id="btn-toggle-available" onclick="toggleAvailableCourses()">🔓 المتاح للتسجيل</button>
                 <button class="btn btn-story" onclick="openStoryModal()">📸 بطاقة إنجازي (ستوري)</button>
                 <button class="btn btn-report" onclick="printPassedCoursesReport()">📄 تقرير بالمواد المجتازة</button>
@@ -1057,6 +1080,7 @@
         let totalHours = 0;
         let graduationCelebrated = false;
         let showAvailableState = false;
+        let deferredPrompt = null;
 
         const prerequisitesMap = {
             'box-osool-1': 'box-madkhal-fiqh',
@@ -1079,6 +1103,23 @@
             'box-firaq': 'box-madkhal-aqeedah',
             'box-qiraat-aqeedah': 'box-madkhal-aqeedah'
         };
+
+        // إدارة تثبيت التطبيق PWA
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+        });
+
+        function installAppDirectly() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    deferredPrompt = null;
+                });
+            } else {
+                alert('لتثبيت الموقع كتطبيق على هاتفك:\n• على هواتف آيفون (Safari): اضغط زر المشاركة (Share) في الأسفل ثم اختر "إضافة إلى الشاشة الرئيسية (Add to Home Screen)".\n• على هواتف أندرويد (Chrome): اضغط على الثلاث نقاط أعلى الشاشة ثم اختر "تثبيت التطبيق (Install app)".');
+            }
+        }
 
         function handleUniHoursChange(input) {
             let val = parseInt(input.value) || 0;
