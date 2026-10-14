@@ -441,11 +441,13 @@
             align-items: center; 
             justify-content: space-between; 
             line-height: 1.25; 
-            gap: 6px;
-            transition: all 0.22s ease;
+            gap: 6px; 
+            transition: all 0.22s ease; 
             user-select: none;
-            cursor: pointer;
-            position: relative;
+            -webkit-user-select: none;
+            -webkit-touch-callout: none;
+            cursor: pointer; 
+            position: relative; 
         }
 
         .box.root-course { background: var(--box-root); border: 1.8px solid var(--border-root); color: var(--text-root); font-size: 13px; font-weight: 800; width: 100%; }
@@ -496,13 +498,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            pointer-events: none; /* جعل النقر ينفذ مباشرة على المادة ككل */
         }
 
         body.dark-mode .check-box { background: rgba(0, 0, 0, 0.3); }
         .box.completed .check-box { background: rgba(255, 255, 255, 0.25); border-color: #ffffff; }
         .box.completed .check-box::after { content: '✔'; font-size: 11px; color: #ffffff; font-weight: 900; }
 
-        .box-title-text { flex: 1; text-align: center; }
+        .box-title-text { flex: 1; text-align: center; pointer-events: none; }
 
         .info-strip-header {
             background: #dbeafe;
@@ -725,7 +728,7 @@
 
         <!-- 1. مسار الفقه العام وأصول الفقه -->
         <div class="section">
-            <div class="box root-course" id="box-madkhal-fiqh" data-hours="3" title="انقر نقرتين لإضاءة مسار المادة وسلسلتها الكاملة" onclick="handleCourseClick(event, 'box-madkhal-fiqh', null, 'المدخل إلى الفقه الإسلامي', false)" ondblclick="handleCourseDblClick(event, 'box-madkhal-fiqh')">
+            <div class="box root-course" id="box-madkhal-fiqh" data-hours="3" title="اضغط مرتين بالماوس أو مطولاً بالهاتف لإضاءة المسار" onclick="handleCourseClick(event, 'box-madkhal-fiqh', null, 'المدخل إلى الفقه الإسلامي', false)" ondblclick="handleCourseDblClick(event, 'box-madkhal-fiqh')">
                 <span class="box-title-text">المدخل إلى الفقه الإسلامي</span>
                 <span class="check-box"></span>
             </div>
@@ -738,28 +741,28 @@
 
             <div class="grid-main-fiqh">
                 <div class="col card">
-                    <div class="box mand-course" id="box-osool-1" data-hours="3" title="انقر نقرتين لإضاءة مسار المادة وسلسلتها الكاملة" onclick="handleCourseClick(event, 'box-osool-1', 'box-madkhal-fiqh', 'المدخل إلى الفقه الإسلامي', false)" ondblclick="handleCourseDblClick(event, 'box-osool-1')">
+                    <div class="box mand-course" id="box-osool-1" data-hours="3" title="اضغط مرتين بالماوس أو مطولاً بالهاتف لإضاءة المسار" onclick="handleCourseClick(event, 'box-osool-1', 'box-madkhal-fiqh', 'المدخل إلى الفقه الإسلامي', false)" ondblclick="handleCourseDblClick(event, 'box-osool-1')">
                         <span class="box-title-text">علم أصول الفقه الإسلامي (1)</span>
                         <span class="check-box"></span>
                     </div>
                     <div class="grid-osool-subs" style="margin-top: 4px;">
                         <div class="col">
                             <div class="svg-arrow"><svg viewBox="0 0 10 14"><line x1="5" y1="0" x2="5" y2="9" stroke="var(--arrow-stroke)" stroke-width="2"/><polygon points="1,8 5,14 9,8" fill="var(--arrow-stroke)"/></svg></div>
-                            <div class="box mand-course" id="box-osool-3" data-hours="3" title="انقر نقرتين لإضاءة مسار المادة وسلسلتها الكاملة" onclick="handleCourseClick(event, 'box-osool-3', 'box-osool-1', 'علم أصول الفقه الإسلامي (1)', false)" ondblclick="handleCourseDblClick(event, 'box-osool-3')">
+                            <div class="box mand-course" id="box-osool-3" data-hours="3" title="اضغط مرتين بالماوس أو مطولاً بالهاتف لإضاءة المسار" onclick="handleCourseClick(event, 'box-osool-3', 'box-osool-1', 'علم أصول الفقه الإسلامي (1)', false)" ondblclick="handleCourseDblClick(event, 'box-osool-3')">
                                 <span class="box-title-text">علم أصول الفقه (3)</span>
                                 <span class="check-box"></span>
                             </div>
                         </div>
                         <div class="col">
                             <div class="svg-arrow"><svg viewBox="0 0 10 14"><line x1="5" y1="0" x2="5" y2="9" stroke="var(--arrow-stroke)" stroke-width="2"/><polygon points="1,8 5,14 9,8" fill="var(--arrow-stroke)"/></svg></div>
-                            <div class="box mand-course" id="box-fiqh-muqaran" data-hours="3" title="انقر نقرتين لإضاءة مسار المادة وسلسلتها الكاملة" onclick="handleCourseClick(event, 'box-fiqh-muqaran', 'box-osool-1', 'علم أصول الفقه الإسلامي (1)', false)" ondblclick="handleCourseDblClick(event, 'box-fiqh-muqaran')">
+                            <div class="box mand-course" id="box-fiqh-muqaran" data-hours="3" title="اضغط مرتين بالماوس أو مطولاً بالهاتف لإضاءة المسار" onclick="handleCourseClick(event, 'box-fiqh-muqaran', 'box-osool-1', 'علم أصول الفقه الإسلامي (1)', false)" ondblclick="handleCourseDblClick(event, 'box-fiqh-muqaran')">
                                 <span class="box-title-text">مسائل في الفقه المقارن</span>
                                 <span class="check-box"></span>
                             </div>
                         </div>
                         <div class="col">
                             <div class="svg-arrow"><svg viewBox="0 0 10 14"><line x1="5" y1="0" x2="5" y2="9" stroke="#f59e0b" stroke-width="2" stroke-dasharray="2,2"/><polygon points="1,8 5,14 9,8" fill="#f59e0b"/></svg></div>
-                            <div class="box opt-course is-elective" id="box-ai-fiqh" data-hours="3" title="انقر نقرتين لإضاءة مسار المادة وسلسلتها الكاملة" onclick="handleCourseClick(event, 'box-ai-fiqh', 'box-osool-1', 'علم أصول الفقه الإسلامي (1)', true)" ondblclick="handleCourseDblClick(event, 'box-ai-fiqh')">
+                            <div class="box opt-course is-elective" id="box-ai-fiqh" data-hours="3" title="اضغط مرتين بالماوس أو مطولاً بالهاتف لإضاءة المسار" onclick="handleCourseClick(event, 'box-ai-fiqh', 'box-osool-1', 'علم أصول الفقه الإسلامي (1)', true)" ondblclick="handleCourseDblClick(event, 'box-ai-fiqh')">
                                 <span class="box-title-text">قضايا فقهية معاصرة (اختياري)</span>
                                 <span class="check-box"></span>
                             </div>
@@ -768,31 +771,31 @@
                 </div>
 
                 <div class="col card">
-                    <div class="box mand-course" id="box-muamalat-1" data-hours="3" title="انقر نقرتين لإضاءة مسار المادة وسلسلتها الكاملة" onclick="handleCourseClick(event, 'box-muamalat-1', 'box-madkhal-fiqh', 'المدخل إلى الفقه الإسلامي', false)" ondblclick="handleCourseDblClick(event, 'box-muamalat-1')">
+                    <div class="box mand-course" id="box-muamalat-1" data-hours="3" title="اضغط مرتين بالماوس أو مطولاً بالهاتف لإضاءة المسار" onclick="handleCourseClick(event, 'box-muamalat-1', 'box-madkhal-fiqh', 'المدخل إلى الفقه الإسلامي', false)" ondblclick="handleCourseDblClick(event, 'box-muamalat-1')">
                         <span class="box-title-text">فقه المعاملات المالية (1)</span>
                         <span class="check-box"></span>
                     </div>
                     <div class="svg-arrow"><svg viewBox="0 0 10 14"><line x1="5" y1="0" x2="5" y2="9" stroke="var(--arrow-stroke)" stroke-width="2"/><polygon points="1,8 5,14 9,8" fill="var(--arrow-stroke)"/></svg></div>
-                    <div class="box mand-course" id="box-muamalat-2" data-hours="3" title="انقر نقرتين لإضاءة مسار المادة وسلسلتها الكاملة" onclick="handleCourseClick(event, 'box-muamalat-2', 'box-muamalat-1', 'فقه المعاملات المالية (1)', false)" ondblclick="handleCourseDblClick(event, 'box-muamalat-2')">
+                    <div class="box mand-course" id="box-muamalat-2" data-hours="3" title="اضغط مرتين بالماوس أو مطولاً بالهاتف لإضاءة المسار" onclick="handleCourseClick(event, 'box-muamalat-2', 'box-muamalat-1', 'فقه المعاملات المالية (1)', false)" ondblclick="handleCourseDblClick(event, 'box-muamalat-2')">
                         <span class="box-title-text">فقه المعاملات المالية (2)</span>
                         <span class="check-box"></span>
                     </div>
                 </div>
 
                 <div class="col card" style="gap: 5px;">
-                    <div class="box mand-course" id="box-osool-2" data-hours="3" title="انقر نقرتين لإضاءة مسار المادة وسلسلتها الكاملة" onclick="handleCourseClick(event, 'box-osool-2', 'box-madkhal-fiqh', 'المدخل إلى الفقه الإسلامي', false)" ondblclick="handleCourseDblClick(event, 'box-osool-2')">
+                    <div class="box mand-course" id="box-osool-2" data-hours="3" title="اضغط مرتين بالماوس أو مطولاً بالهاتف لإضاءة المسار" onclick="handleCourseClick(event, 'box-osool-2', 'box-madkhal-fiqh', 'المدخل إلى الفقه الإسلامي', false)" ondblclick="handleCourseDblClick(event, 'box-osool-2')">
                         <span class="box-title-text">علم أصول الفقه الإسلامي (2)</span>
                         <span class="check-box"></span>
                     </div>
-                    <div class="box mand-course" id="box-uqubat" data-hours="3" title="انقر نقرتين لإضاءة مسار المادة وسلسلتها الكاملة" onclick="handleCourseClick(event, 'box-uqubat', 'box-madkhal-fiqh', 'المدخل إلى الفقه الإسلامي', false)" ondblclick="handleCourseDblClick(event, 'box-uqubat')">
+                    <div class="box mand-course" id="box-uqubat" data-hours="3" title="اضغط مرتين بالماوس أو مطولاً بالهاتف لإضاءة المسار" onclick="handleCourseClick(event, 'box-uqubat', 'box-madkhal-fiqh', 'المدخل إلى الفقه الإسلامي', false)" ondblclick="handleCourseDblClick(event, 'box-uqubat')">
                         <span class="box-title-text">فقه العقوبات في الإسلام</span>
                         <span class="check-box"></span>
                     </div>
-                    <div class="box mand-course" id="box-qadaa" data-hours="3" title="انقر نقرتين لإضاءة مسار المادة وسلسلتها الكاملة" onclick="handleCourseClick(event, 'box-qadaa', 'box-madkhal-fiqh', 'المدخل إلى الفقه الإسلامي', false)" ondblclick="handleCourseDblClick(event, 'box-qadaa')">
+                    <div class="box mand-course" id="box-qadaa" data-hours="3" title="اضغط مرتين بالماوس أو مطولاً بالهاتف لإضاءة المسار" onclick="handleCourseClick(event, 'box-qadaa', 'box-madkhal-fiqh', 'المدخل إلى الفقه الإسلامي', false)" ondblclick="handleCourseDblClick(event, 'box-qadaa')">
                         <span class="box-title-text">فقه القضاء وطرق الإثبات الشرعي</span>
                         <span class="check-box"></span>
                     </div>
-                    <div class="box mand-course" id="box-madani" data-hours="3" title="انقر نقرتين لإضاءة مسار المادة وسلسلتها الكاملة" onclick="handleCourseClick(event, 'box-madani', 'box-madkhal-fiqh', 'المدخل إلى الفقه الإسلامي', false)" ondblclick="handleCourseDblClick(event, 'box-madani')">
+                    <div class="box mand-course" id="box-madani" data-hours="3" title="اضغط مرتين بالماوس أو مطولاً بالهاتف لإضاءة المسار" onclick="handleCourseClick(event, 'box-madani', 'box-madkhal-fiqh', 'المدخل إلى الفقه الإسلامي', false)" ondblclick="handleCourseDblClick(event, 'box-madani')">
                         <span class="box-title-text">فقه القانون المدني الأردني</span>
                         <span class="check-box"></span>
                     </div>
@@ -805,12 +808,12 @@
             <div class="grid-5">
                 <!-- فقه العبادات -->
                 <div class="card col">
-                    <div class="box root-course" id="box-tahara" data-hours="3" title="انقر نقرتين لإضاءة مسار المادة وسلسلتها الكاملة" onclick="handleCourseClick(event, 'box-tahara', null, 'فقه الطهارة', false)" ondblclick="handleCourseDblClick(event, 'box-tahara')">
+                    <div class="box root-course" id="box-tahara" data-hours="3" title="اضغط مرتين بالماوس أو مطولاً بالهاتف لإضاءة المسار" onclick="handleCourseClick(event, 'box-tahara', null, 'فقه الطهارة', false)" ondblclick="handleCourseDblClick(event, 'box-tahara')">
                         <span class="box-title-text">فقه الطهارة</span>
                         <span class="check-box"></span>
                     </div>
                     <div class="svg-arrow"><svg viewBox="0 0 10 14"><line x1="5" y1="0" x2="5" y2="9" stroke="var(--arrow-stroke)" stroke-width="2"/><polygon points="1,8 5,14 9,8" fill="var(--arrow-stroke)"/></svg></div>
-                    <div class="box mand-course" id="box-salah" data-hours="3" title="انقر نقرتين لإضاءة مسار المادة وسلسلتها الكاملة" onclick="handleCourseClick(event, 'box-salah', 'box-tahara', 'فقه الطهارة', false)" ondblclick="handleCourseDblClick(event, 'box-salah')">
+                    <div class="box mand-course" id="box-salah" data-hours="3" title="اضغط مرتين بالماوس أو مطولاً بالهاتف لإضاءة المسار" onclick="handleCourseClick(event, 'box-salah', 'box-tahara', 'فقه الطهارة', false)" ondblclick="handleCourseDblClick(event, 'box-salah')">
                         <span class="box-title-text">فقه الصلاة</span>
                         <span class="check-box"></span>
                     </div>
@@ -818,12 +821,12 @@
 
                 <!-- الأحوال الشخصية -->
                 <div class="card col">
-                    <div class="box root-course" id="box-ahwal-1" data-hours="3" title="انقر نقرتين لإضاءة مسار المادة وسلسلتها الكاملة" onclick="handleCourseClick(event, 'box-ahwal-1', null, 'فقه الأحوال الشخصية (1)', false)" ondblclick="handleCourseDblClick(event, 'box-ahwal-1')">
+                    <div class="box root-course" id="box-ahwal-1" data-hours="3" title="اضغط مرتين بالماوس أو مطولاً بالهاتف لإضاءة المسار" onclick="handleCourseClick(event, 'box-ahwal-1', null, 'فقه الأحوال الشخصية (1)', false)" ondblclick="handleCourseDblClick(event, 'box-ahwal-1')">
                         <span class="box-title-text">فقه الأحوال الشخصية (1)</span>
                         <span class="check-box"></span>
                     </div>
                     <div class="svg-arrow"><svg viewBox="0 0 10 14"><line x1="5" y1="0" x2="5" y2="9" stroke="var(--arrow-stroke)" stroke-width="2"/><polygon points="1,8 5,14 9,8" fill="var(--arrow-stroke)"/></svg></div>
-                    <div class="box mand-course" id="box-ahwal-2" data-hours="3" title="انقر نقرتين لإضاءة مسار المادة وسلسلتها الكاملة" onclick="handleCourseClick(event, 'box-ahwal-2', 'box-ahwal-1', 'فقه الأحوال الشخصية (1)', false)" ondblclick="handleCourseDblClick(event, 'box-ahwal-2')">
+                    <div class="box mand-course" id="box-ahwal-2" data-hours="3" title="اضغط مرتين بالماوس أو مطولاً بالهاتف لإضاءة المسار" onclick="handleCourseClick(event, 'box-ahwal-2', 'box-ahwal-1', 'فقه الأحوال الشخصية (1)', false)" ondblclick="handleCourseDblClick(event, 'box-ahwal-2')">
                         <span class="box-title-text">فقه الأحوال الشخصية (2)</span>
                         <span class="check-box"></span>
                     </div>
@@ -831,17 +834,17 @@
 
                 <!-- القرآن والتلاوة -->
                 <div class="card col">
-                    <div class="box root-course" id="box-tilawa-1" data-hours="1" title="انقر نقرتين لإضاءة مسار المادة وسلسلتها الكاملة" onclick="handleCourseClick(event, 'box-tilawa-1', null, 'التلاوة والحفظ (1)', false)" ondblclick="handleCourseDblClick(event, 'box-tilawa-1')">
+                    <div class="box root-course" id="box-tilawa-1" data-hours="1" title="اضغط مرتين بالماوس أو مطولاً بالهاتف لإضاءة المسار" onclick="handleCourseClick(event, 'box-tilawa-1', null, 'التلاوة والحفظ (1)', false)" ondblclick="handleCourseDblClick(event, 'box-tilawa-1')">
                         <span class="box-title-text">التلاوة والحفظ (1)</span>
                         <span class="check-box"></span>
                     </div>
                     <div class="svg-arrow"><svg viewBox="0 0 10 14"><line x1="5" y1="0" x2="5" y2="9" stroke="var(--arrow-stroke)" stroke-width="2"/><polygon points="1,8 5,14 9,8" fill="var(--arrow-stroke)"/></svg></div>
-                    <div class="box mand-course" id="box-tilawa-2" data-hours="1" title="انقر نقرتين لإضاءة مسار المادة وسلسلتها الكاملة" onclick="handleCourseClick(event, 'box-tilawa-2', 'box-tilawa-1', 'التلاوة والحفظ (1)', false)" ondblclick="handleCourseDblClick(event, 'box-tilawa-2')">
+                    <div class="box mand-course" id="box-tilawa-2" data-hours="1" title="اضغط مرتين بالماوس أو مطولاً بالهاتف لإضاءة المسار" onclick="handleCourseClick(event, 'box-tilawa-2', 'box-tilawa-1', 'التلاوة والحفظ (1)', false)" ondblclick="handleCourseDblClick(event, 'box-tilawa-2')">
                         <span class="box-title-text">التلاوة والحفظ (2)</span>
                         <span class="check-box"></span>
                     </div>
                     <div class="svg-arrow"><svg viewBox="0 0 10 14"><line x1="5" y1="0" x2="5" y2="9" stroke="var(--arrow-stroke)" stroke-width="2"/><polygon points="1,8 5,14 9,8" fill="var(--arrow-stroke)"/></svg></div>
-                    <div class="box mand-course" id="box-tilawa-3" data-hours="1" title="انقر نقرتين لإضاءة مسار المادة وسلسلتها الكاملة" onclick="handleCourseClick(event, 'box-tilawa-3', 'box-tilawa-2', 'التلاوة والحفظ (2)', false)" ondblclick="handleCourseDblClick(event, 'box-tilawa-3')">
+                    <div class="box mand-course" id="box-tilawa-3" data-hours="1" title="اضغط مرتين بالماوس أو مطولاً بالهاتف لإضاءة المسار" onclick="handleCourseClick(event, 'box-tilawa-3', 'box-tilawa-2', 'التلاوة والحفظ (2)', false)" ondblclick="handleCourseDblClick(event, 'box-tilawa-3')">
                         <span class="box-title-text">التلاوة والحفظ (3)</span>
                         <span class="check-box"></span>
                     </div>
@@ -849,7 +852,7 @@
 
                 <!-- الحديث الشريف -->
                 <div class="card col">
-                    <div class="box root-course" id="box-hadith-ulum" data-hours="3" title="انقر نقرتين لإضاءة مسار المادة وسلسلتها الكاملة" onclick="handleCourseClick(event, 'box-hadith-ulum', null, 'علوم الحديث الشريف', false)" ondblclick="handleCourseDblClick(event, 'box-hadith-ulum')">
+                    <div class="box root-course" id="box-hadith-ulum" data-hours="3" title="اضغط مرتين بالماوس أو مطولاً بالهاتف لإضاءة المسار" onclick="handleCourseClick(event, 'box-hadith-ulum', null, 'علوم الحديث الشريف', false)" ondblclick="handleCourseDblClick(event, 'box-hadith-ulum')">
                         <span class="box-title-text">علوم الحديث الشريف</span>
                         <span class="check-box"></span>
                     </div>
@@ -864,11 +867,11 @@
                         </svg>
                     </div>
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px;">
-                        <div class="box mand-course" id="box-hadith-takhrij" data-hours="3" style="font-size: 11px; padding: 4px 2px;" title="انقر نقرتين لإضاءة مسار المادة وسلسلتها الكاملة" onclick="handleCourseClick(event, 'box-hadith-takhrij', 'box-hadith-ulum', 'علوم الحديث الشريف', false)" ondblclick="handleCourseDblClick(event, 'box-hadith-takhrij')">
+                        <div class="box mand-course" id="box-hadith-takhrij" data-hours="3" style="font-size: 11px; padding: 4px 2px;" title="اضغط مرتين بالماوس أو مطولاً بالهاتف لإضاءة المسار" onclick="handleCourseClick(event, 'box-hadith-takhrij', 'box-hadith-ulum', 'علوم الحديث الشريف', false)" ondblclick="handleCourseDblClick(event, 'box-hadith-takhrij')">
                             <span class="box-title-text">تخريج الأحاديث</span>
                             <span class="check-box"></span>
                         </div>
-                        <div class="box mand-course" id="box-hadith-tahlili" data-hours="3" style="font-size: 11px; padding: 4px 2px;" title="انقر نقرتين لإضاءة مسار المادة وسلسلتها الكاملة" onclick="handleCourseClick(event, 'box-hadith-tahlili', 'box-hadith-ulum', 'علوم الحديث الشريف', false)" ondblclick="handleCourseDblClick(event, 'box-hadith-tahlili')">
+                        <div class="box mand-course" id="box-hadith-tahlili" data-hours="3" style="font-size: 11px; padding: 4px 2px;" title="اضغط مرتين بالماوس أو مطولاً بالهاتف لإضاءة المسار" onclick="handleCourseClick(event, 'box-hadith-tahlili', 'box-hadith-ulum', 'علوم الحديث الشريف', false)" ondblclick="handleCourseDblClick(event, 'box-hadith-tahlili')">
                             <span class="box-title-text">الحديث التحليلي</span>
                             <span class="check-box"></span>
                         </div>
@@ -877,7 +880,7 @@
 
                 <!-- العقيدة الإسلامية -->
                 <div class="card col">
-                    <div class="box root-course" id="box-madkhal-aqeedah" data-hours="3" title="انقر نقرتين لإضاءة مسار المادة وسلسلتها الكاملة" onclick="handleCourseClick(event, 'box-madkhal-aqeedah', null, 'المدخل إلى العقيدة الإسلامية', false)" ondblclick="handleCourseDblClick(event, 'box-madkhal-aqeedah')">
+                    <div class="box root-course" id="box-madkhal-aqeedah" data-hours="3" title="اضغط مرتين بالماوس أو مطولاً بالهاتف لإضاءة المسار" onclick="handleCourseClick(event, 'box-madkhal-aqeedah', null, 'المدخل إلى العقيدة الإسلامية', false)" ondblclick="handleCourseDblClick(event, 'box-madkhal-aqeedah')">
                         <span class="box-title-text">المدخل إلى العقيدة الإسلامية</span>
                         <span class="check-box"></span>
                     </div>
@@ -890,17 +893,17 @@
                         </svg>
                     </div>
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px;">
-                        <div class="box mand-course" id="box-aqeedah-main" data-hours="3" style="font-size: 11px; padding: 4px 2px;" title="انقر نقرتين لإضاءة مسار المادة وسلسلتها الكاملة" onclick="handleCourseClick(event, 'box-aqeedah-main', 'box-madkhal-aqeedah', 'المدخل إلى العقيدة الإسلامية', false)" ondblclick="handleCourseDblClick(event, 'box-aqeedah-main')">
+                        <div class="box mand-course" id="box-aqeedah-main" data-hours="3" style="font-size: 11px; padding: 4px 2px;" title="اضغط مرتين بالماوس أو مطولاً بالهاتف لإضاءة المسار" onclick="handleCourseClick(event, 'box-aqeedah-main', 'box-madkhal-aqeedah', 'المدخل إلى العقيدة الإسلامية', false)" ondblclick="handleCourseDblClick(event, 'box-aqeedah-main')">
                             <span class="box-title-text">العقيدة الإسلامية</span>
                             <span class="check-box"></span>
                         </div>
-                        <div class="box mand-course" id="box-firaq" data-hours="3" style="font-size: 11px; padding: 4px 2px;" title="انقر نقرتين لإضاءة مسار المادة وسلسلتها الكاملة" onclick="handleCourseClick(event, 'box-firaq', 'box-madkhal-aqeedah', 'المدخل إلى العقيدة الإسلامية', false)" ondblclick="handleCourseDblClick(event, 'box-firaq')">
+                        <div class="box mand-course" id="box-firaq" data-hours="3" style="font-size: 11px; padding: 4px 2px;" title="اضغط مرتين بالماوس أو مطولاً بالهاتف لإضاءة المسار" onclick="handleCourseClick(event, 'box-firaq', 'box-madkhal-aqeedah', 'المدخل إلى العقيدة الإسلامية', false)" ondblclick="handleCourseDblClick(event, 'box-firaq')">
                             <span class="box-title-text">الفرق والأديان</span>
                             <span class="check-box"></span>
                         </div>
                     </div>
                     <div class="svg-arrow"><svg viewBox="0 0 10 14"><line x1="5" y1="0" x2="5" y2="9" stroke="#f59e0b" stroke-width="2" stroke-dasharray="2,2"/><polygon points="1,8 5,14 9,8" fill="#f59e0b"/></svg></div>
-                    <div class="box opt-course is-elective" id="box-qiraat-aqeedah" data-hours="3" title="انقر نقرتين لإضاءة مسار المادة وسلسلتها الكاملة" onclick="handleCourseClick(event, 'box-qiraat-aqeedah', 'box-madkhal-aqeedah', 'المدخل إلى العقيدة الإسلامية', true)" ondblclick="handleCourseDblClick(event, 'box-qiraat-aqeedah')">
+                    <div class="box opt-course is-elective" id="box-qiraat-aqeedah" data-hours="3" title="اضغط مرتين بالماوس أو مطولاً بالهاتف لإضاءة المسار" onclick="handleCourseClick(event, 'box-qiraat-aqeedah', 'box-madkhal-aqeedah', 'المدخل إلى العقيدة الإسلامية', true)" ondblclick="handleCourseDblClick(event, 'box-qiraat-aqeedah')">
                         <span class="box-title-text">قراءات في كتب العقيدة (اختياري)</span>
                         <span class="check-box"></span>
                     </div>
@@ -948,12 +951,12 @@
             <div class="legend-item"><span class="badge" style="background:#fefce8; border:1px dashed #fde047;"></span> اختياري تخصص (مادتان فقط)</div>
             <div class="legend-item"><span class="badge" style="background:#f8fafc; border:1px solid #cbd5e1;"></span> بدون متطلب سابق</div>
             <div class="legend-item"><span class="badge" style="background:#0369a1; border:1px solid #075985;"></span> مادة منجزة (تصبح أغمق)</div>
-            <div class="legend-item" style="color:#0284c7; font-weight:900;"><span class="badge" style="background:#0284c7; box-shadow:0 0 6px #0284c7;"></span> 💡 نصيحة: انقر نقرتين (أو اضغط مطولاً) على أي مادة لإضاءة مسارها وسلسلتها بالكامل!</div>
+            <div class="legend-item" style="color:#0284c7; font-weight:900;"><span class="badge" style="background:#0284c7; box-shadow:0 0 6px #0284c7;"></span> 💡 نصيحة: انقر نقرتين بالماوس (أو اضغط مطولاً على الهاتف) لإضاءة مسار أي مادة!</div>
         </div>
 
         <!-- التذييل -->
         <div class="developer-footer">
-            تم تطوير هذه الخطة بواسطة الطالب <span class="name">إيهاب الزعاترة</span>، <span class="dua">ولا تنسوني ووالدَيَّ من صالح دعائكم 🤲</span>
+            تم تطوير هذه الخطة بواسطة الطالب <span class="name">إيهاب الزعاترة</span>، <span class="dua">ولا تنسوني ووالدَيَّ من صالح دعائكم 🤲</span>
         </div>
     </div>
 
@@ -994,6 +997,10 @@
         let deferredPrompt = null;
         let activeHighlightCourseId = null;
 
+        // متغيرات للتحكم بالضغط المطول وتفادي تفعيل النقر بالخطأ
+        let isLongPress = false;
+        let touchTimer = null;
+
         const prerequisitesMap = {
             'box-osool-1': 'box-madkhal-fiqh',
             'box-osool-2': 'box-madkhal-fiqh',
@@ -1027,14 +1034,12 @@
             const prerequisitePath = new Set([courseId]);
             let currentCourseId = courseId;
 
-            // تتبع المتطلبات السابقة للأعلى حتى الوصول إلى أول مادة في السلسلة
             while (prerequisitesMap[currentCourseId]) {
                 const prerequisiteId = prerequisitesMap[currentCourseId];
                 prerequisitePath.add(prerequisiteId);
                 currentCourseId = prerequisiteId;
             }
 
-            // إضاءة المادة ومتطلباتها السابقة فقط، وتعتيم جميع المواد الأخرى
             document.querySelectorAll('.box').forEach(box => {
                 if (prerequisitePath.has(box.id)) {
                     box.classList.add('highlighted-path');
@@ -1056,40 +1061,47 @@
             });
         }
 
+        // معالجة الضغطتين بالماوس
         function handleCourseDblClick(e, courseId) {
             e.stopPropagation();
             highlightCoursePath(courseId);
         }
 
+        // معالجة النقر العادي (تحديد/إلغاء تحديد المادة فوراً)
         function handleCourseClick(e, courseId, prereqId, prereqName, isElective) {
             e.stopPropagation();
 
-            // النقر على مربع الصح لتحديد المادة كمجتازة، والنقر على اسم/بطاقة المادة لإظهار متطلباتها
-            if (e.target.closest('.check-box')) {
-                toggleCourse(courseId, prereqId, prereqName, isElective);
+            // إذا انتهت ضغطة مطولة لتوه، لا نعتبرها نقرة عادية
+            if (isLongPress) {
+                isLongPress = false;
                 return;
             }
 
-            highlightCoursePath(courseId);
+            // النقر في أي مكان داخل المادة يحددها
+            toggleCourse(courseId, prereqId, prereqName, isElective);
         }
 
-        // دعم الضغط المطول على الهواتف لإضاءة المسار
-        let touchTimer = null;
-        document.querySelectorAll('.box').forEach(box => {
-            box.addEventListener('touchstart', (e) => {
-                touchTimer = setTimeout(() => {
-                    highlightCoursePath(box.id);
-                }, 600);
-            }, { passive: true });
+        // إعداد الضغط المطول للهواتف لمنع تضاربه مع النقر
+        function setupTouchEvents() {
+            document.querySelectorAll('.box').forEach(box => {
+                box.addEventListener('touchstart', (e) => {
+                    isLongPress = false;
+                    touchTimer = setTimeout(() => {
+                        isLongPress = true;
+                        highlightCoursePath(box.id);
+                        if (navigator.vibrate) navigator.vibrate(50); // اهتزاز خفيف لتأكيد الإضاءة إن وجد
+                    }, 500);
+                }, { passive: true });
 
-            box.addEventListener('touchend', () => {
-                if (touchTimer) clearTimeout(touchTimer);
-            });
+                box.addEventListener('touchend', () => {
+                    if (touchTimer) clearTimeout(touchTimer);
+                });
 
-            box.addEventListener('touchmove', () => {
-                if (touchTimer) clearTimeout(touchTimer);
+                box.addEventListener('touchmove', () => {
+                    if (touchTimer) clearTimeout(touchTimer);
+                });
             });
-        });
+        }
 
         // إدارة تثبيت التطبيق PWA
         window.addEventListener('beforeinstallprompt', (e) => {
@@ -1329,7 +1341,6 @@
             if (btn) btn.textContent = isDark ? '☀️ النمط النهاري' : '🌙 النمط الليلي';
         }
 
-
         function openShareModal() {
             document.getElementById('shareModal').style.display = 'flex';
         }
@@ -1363,6 +1374,7 @@
 
         window.addEventListener('DOMContentLoaded', () => {
             updateDarkModeBtnText(document.body.classList.contains('dark-mode'));
+            setupTouchEvents();
             loadProgress();
         });
     </script>
